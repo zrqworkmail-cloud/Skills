@@ -1,0 +1,23 @@
+# 依赖
+node_modules/
+
+# 渲染产物（成片 / 底板 / 帧 / 音频，约 673MB，单文件超 GitHub 100MB 限制）
+out/
+
+# Python 缓存
+__pycache__/
+*.pyc
+
+# 日志与临时文件
+*.log
+# 渲染调试时重定向出来的 stderr 快照（err_v2..vN），属一次性排障产物
+err_v*.txt
+.DS_Store
+Thumbs.db
+
+# 投稿副本（成片已在 out/ 内且不入库）
+*.mp4
+
+# 渲染排障日志（一次性产物，不入库）
+err_*.txt
+render_log*.txt
