@@ -65,16 +65,18 @@ vibe-knowledge-video/
 ## 使用方式
 
 ```bash
-git clone https://github.com/zrqworkmail-cloud/vibe-knowledge-video.git
-cd vibe-knowledge-video
+# 公开镜像（只读快照）：仓库里的 video-generator/workbuddy-video-generator 子目录
+git clone https://github.com/zrqworkmail-cloud/Skills.git
+cd Skills/video-generator/workbuddy-video-generator
 
 # 把 WorkBuddy 技能装到用户级（WorkBuddy 只认这个路径）
 SRC="."   # 仓库根就是技能本体
 DST="$HOME/.workbuddy-ai/skills/workbuddy-video-workflow"
-mkdir -p "$DST/references" "$DST/scripts"
+mkdir -p "$DST"
 cp "$SRC/SKILL.md" "$DST/SKILL.md"
-cp "$SRC"/references/* "$DST/references/"
-cp "$SRC"/scripts/* "$DST/scripts/"
+cp -r "$SRC/references" "$DST/references"
+cp -r "$SRC/scripts"    "$DST/scripts"
+cp -r "$SRC/assets"     "$DST/assets"   # 音源母版在这里，漏了就没 BGM
 ```
 
 ## 约定
