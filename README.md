@@ -12,17 +12,29 @@
 | [video-generator/](./video-generator/) | 视频制作 | 领域入口，按平台分子目录 |
 | └ [workbuddy-video-generator/](./video-generator/workbuddy-video-generator/) | 视频制作 · WorkBuddy | 从选题到成片提交的完整流程：选题 → 脚本 → 分镜 → 素材 → 剪辑合成 → 质检 → 交付 → 发布复盘。含技能本体、方法论、参考实现代码、各支片复盘 |
 
-## 每个子目录的结构
+## 目录结构
+
+两种层级都允许，按"是否有平台差异"选：
 
 ```
-<领域>/
-└── <平台>-<领域>/
-    ├── README.md          ← 从这开始
-    ├── skills/            ← 技能本体（按平台分，可直接装到 agent）
-    ├── docs/              ← 方法论与决策记录
-    ├── films/ 或 output/  ← 实际产出与复盘
-    └── reference/         ← 参考实现代码
+单一/通用技能                    多平台技能
+<领域>-generator/                <领域>-generator/
+├── SKILL.md                     └── <平台>-<领域>-generator/
+├── references/                      ├── README.md
+└── scripts/                         ├── skills/
+                                     ├── docs/
+                                     ├── films/ 或 output/
+                                     └── reference/
 ```
+
+- `slide-generator/` 用单层：技能本身与平台无关，直接可装
+- `video-generator/workbuddy-video-generator/` 用两层：视频流程较长，且预留了往 Codex / Qoder 等平台迁移的位置
+
+## 命名约定
+
+- 领域目录：`<领域>-generator/`（如 `video-generator`、`slide-generator`）
+- 平台子目录：`<平台>-<领域>-generator/`（如 `workbuddy-video-generator`）
+- 不用 `production` / `-skill` 后缀——产出物叫 generator，技能本体是其中的 `SKILL.md`
 
 ## 用法
 
