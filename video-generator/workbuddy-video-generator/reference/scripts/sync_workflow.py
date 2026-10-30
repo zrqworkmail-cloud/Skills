@@ -88,6 +88,12 @@ def main():
     head = run(["git", "log", "--oneline", "-1"]).stdout.strip()
     print(f"✔ 已提交 {head}")
 
+    # 纯本地源（origin 已被移除，例如旧远程仓归档后）：没有可推的目标，
+    # 提交完就结束，别去试 2 次必败的 push 再退 API——那会变成每天一条假报错。
+    if run(["git", "remote", "get-url", "origin"], check=False).returncode != 0:
+        print("· 无 origin（纯本地源），改动已提交；对外同步走公开仓快照（见 docs §12 ⑥）")
+        return 0
+
     # 先试标准通道。本机代理通常拦 github.com:443，所以大概率会失败，
     # 因此只试 2 次（每次要等代理超时约 20 秒），然后转 API 通道。
     for attempt in range(1, 3):
