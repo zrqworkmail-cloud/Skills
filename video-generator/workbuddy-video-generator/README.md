@@ -20,11 +20,9 @@ vibe-knowledge-video/
 ├── README.md                    ← 本文件
 ├── .gitignore
 │
-├── skills/                      ★ 技能（跨项目复用）
-│   ├── README.md                ← 存放规则、同步命令、写作约定
-│   └── workbuddy-video-workflow/
-│           ├── SKILL.md         ← 主干流程（八阶段）
-│           └── references/      ← 按需加载的详细手册
+├── SKILL.md                     ★ 技能本体（workbuddy-video-workflow，八阶段主干）
+├── scripts/                     ★ 技能自带脚本（qc_rhythm.py 节奏体检）
+├── references/                  ★ 技能手册（按需加载的详细文档）
 │
 ├── docs/                        ← 方法论（回答"为什么"）
 │   ├── 视频制作通用流程.md        ← 代码渲染的完整方法论
@@ -43,7 +41,7 @@ vibe-knowledge-video/
 
 ## 技能：跨项目复用的部分
 
-`skills/workbuddy-video-workflow/` 是一条**与项目、工具、素材来源都无关**的视频制作流程：
+本仓库根目录（`SKILL.md`）就是一条**与项目、工具、素材来源都无关**的视频制作流程：
 
 ```
 选题 → 脚本 → 分镜 → 素材 → 剪辑合成 → 质检 → 交付 → 发布复盘
@@ -51,15 +49,15 @@ vibe-knowledge-video/
 
 每阶段给「做什么 / 判据 / 常见错误」。换题材、换工具、换平台，阶段顺序不变，只有「素材」那一步的实现方式变（代码渲染 / AI 生成 / 实拍 / 混剪 / 图文）。
 
-**技能名 hyphen-case 小写**：`skills/<skill-name>/`（如 `workbuddy-video-workflow`），与 SKILL.md 的 `name` 一致——skill-creator 校验要求 `^[a-z0-9-]+$`。
+**技能名 hyphen-case 小写**：`workbuddy-video-workflow`，与 SKILL.md 的 `name` 一致——skill-creator 校验要求 `^[a-z0-9-]+$`。安装到用户级时目录名用技能名。
 
-**为什么仓库里还要存一份**：WorkBuddy 只从用户级目录 `~/.workbuddy-ai/skills/` 加载技能，不认仓库路径；但仓库要管版本。所以**仓库为源，用户级为运行时副本**，单向同步。详见 [skills/README.md](./skills/README.md)。
+**为什么仓库里还要存一份**：WorkBuddy 只从用户级目录 `~/.workbuddy-ai/skills/` 加载技能，不认仓库路径；但仓库要管版本。所以**仓库为源，用户级为运行时副本**，单向同步（命令见下）。改完必须同步、`diff -r` 无差异才算完。
 
 ## 四层结构
 
 | 层 | 位置 | 回答什么 |
 |---|---|---|
-| **技能** | `skills/` | **怎么做**（可跨项目套用，含判据） |
+| **技能** | 仓库根（`SKILL.md` + `scripts/` + `references/`） | **怎么做**（可跨项目套用，含判据） |
 | **方法论** | `docs/` | 为什么用这些参数与判据 |
 | **复盘** | 技能里的 `references/retro-lessons.md` | 哪些错犯过、怎么防 |
 | **实现** | `reference/` | 具体怎么写代码 |
@@ -71,7 +69,7 @@ git clone https://github.com/zrqworkmail-cloud/vibe-knowledge-video.git
 cd vibe-knowledge-video
 
 # 把 WorkBuddy 技能装到用户级（WorkBuddy 只认这个路径）
-SRC="skills/workbuddy-video-workflow"
+SRC="."   # 仓库根就是技能本体
 DST="$HOME/.workbuddy-ai/skills/workbuddy-video-workflow"
 mkdir -p "$DST/references" "$DST/scripts"
 cp "$SRC/SKILL.md" "$DST/SKILL.md"

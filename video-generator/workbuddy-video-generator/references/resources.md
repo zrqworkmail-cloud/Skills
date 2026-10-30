@@ -20,7 +20,7 @@
 
 ## 技能本体放哪
 
-- **仓库副本**：`skills/workbuddy-video-workflow/`（进 Git，管版本）
+- **仓库副本**：仓库根目录本身（`SKILL.md` + `scripts/` + `references/`，进 Git，管版本）
 - **用户级副本**：`~/.workbuddy-ai/skills/workbuddy-video-workflow/`（运行时实际加载的）
 
 技能名 hyphen-case 小写，且必须与 frontmatter `name` 一致（skill-creator 校验要求 `^[a-z0-9-]+$`）。两份各存一份，**改完必须同步、`diff` 无差异才算完**。

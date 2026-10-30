@@ -479,7 +479,7 @@ Wan2.2 Lightning 4 步蒸馏有明显**运动迟缓**倾向：画面会动，但
 ## 资源
 
 - **`docs/视频制作通用流程.md`（仓库内）**：完整方法论——七参数决策表、通用八步、迁移清单、判据出处。做新题材先读这份。
-- 本技能在仓库 `skills/workbuddy-video-workflow/SKILL.md` 有手工副本，**改完这里必须同步覆盖过去**，否则下次加载到的仍是旧规则。
+- 本技能与仓库同体（仓库根 `SKILL.md` 就是技能本体），**改完必须同步覆盖到用户级 `~/.workbuddy-ai/skills/workbuddy-video-workflow/`**，否则下次加载到的仍是旧规则。
 - 本技能自带的全部手册（SOP / 口播 / 动效词表 / 构图用光 / 踩坑集 / qc_rhythm.py）见 [`resources.md`](./resources.md) 的索引表，此处不再重复。
 
 ## 新片 Checklist

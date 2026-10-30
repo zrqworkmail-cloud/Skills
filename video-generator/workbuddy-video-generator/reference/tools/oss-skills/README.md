@@ -23,7 +23,7 @@
 
 ## 与本工作流的关系
 
-`docs/视频制作通用流程.md` 和 `skills/workbuddy-video-workflow/` 里的部分判据来自这几个项目，具体出处标在对应章节（如 QC 节奏判据来自 anything2explainer 的 `motion_check.py`）。
+`docs/视频制作通用流程.md` 和仓库根 `SKILL.md`（技能 `workbuddy-video-workflow`）里的部分判据来自这几个项目，具体出处标在对应章节（如 QC 节奏判据来自 anything2explainer 的 `motion_check.py`）。
 
 **不是依赖**：删掉这个目录，本工作流照常运行。
 
