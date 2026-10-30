@@ -8,8 +8,8 @@
 
 | 子目录 | 领域 | 说明 |
 |---|---|---|
-| [video-production/](./video-production/) | 视频制作 | 领域入口，按平台分子目录 |
-| └ [workbuddy-video-production/](./video-production/workbuddy-video-production/) | 视频制作 · WorkBuddy | 从选题到成片提交的完整流程：选题 → 脚本 → 分镜 → 素材 → 剪辑合成 → 质检 → 交付 → 发布复盘。含技能本体、方法论、参考实现代码、各支片复盘 |
+| [video-generator/](./video-generator/) | 视频制作 | 领域入口，按平台分子目录 |
+| └ [workbuddy-video-generator/](./video-generator/workbuddy-video-generator/) | 视频制作 · WorkBuddy | 从选题到成片提交的完整流程：选题 → 脚本 → 分镜 → 素材 → 剪辑合成 → 质检 → 交付 → 发布复盘。含技能本体、方法论、参考实现代码、各支片复盘 |
 
 ## 每个子目录的结构
 
