@@ -21,3 +21,4 @@ Thumbs.db
 # 渲染排障日志（一次性产物，不入库）
 err_*.txt
 render_log*.txt
+dist/

@@ -2,13 +2,13 @@
 
 ```
 skills/
-└── WorkBuddy_Skills/            ← WorkBuddy 平台的技能
-    └── WorkBuddy_Video_Workflow/
-        ├── SKILL.md             ← 主干流程，加载时只读这个
-        └── references/          ← 按需加载的详细手册
+└── workbuddy-video-workflow/
+    ├── SKILL.md             ← 主干流程，加载时只读这个
+    ├── scripts/             ← 可执行脚本（qc_rhythm.py 节奏体检）
+    └── references/          ← 按需加载的详细手册
 ```
 
-按平台分一层（`<平台>_Skills/`），是为了以后往别的工具迁时不打乱现有结构。目前只有 `WorkBuddy_Skills`。
+技能名一律 **hyphen-case 小写**（`workbuddy-video-workflow`），与 SKILL.md frontmatter 的 `name` 一致——这是 skill-creator 校验的硬性要求（`^[a-z0-9-]+$`）。
 
 ## 双份机制
 
@@ -16,18 +16,19 @@ WorkBuddy 只认用户级目录 `~/.workbuddy-ai/skills/<name>/SKILL.md`，不�
 
 ```
 仓库（进 Git，版本管理）                    用户级（运行时，不进 Git）
-skills/WorkBuddy_Skills/                  ~/.workbuddy-ai/skills/
-└── WorkBuddy_Video_Workflow/        ──▶  └── WorkBuddy_Video_Workflow/
+skills/                                   ~/.workbuddy-ai/skills/
+└── workbuddy-video-workflow/        ──▶  └── workbuddy-video-workflow/
 ```
 
 **单向同步**：永远改仓库那份，再覆盖到用户级。反向改会丢。
 
 ```bash
-SRC="skills/WorkBuddy_Skills/WorkBuddy_Video_Workflow"
-DST="$HOME/.workbuddy-ai/skills/WorkBuddy_Video_Workflow"
-mkdir -p "$DST/references"
+SRC="skills/workbuddy-video-workflow"
+DST="$HOME/.workbuddy-ai/skills/workbuddy-video-workflow"
+mkdir -p "$DST/references" "$DST/scripts"
 cp "$SRC/SKILL.md" "$DST/SKILL.md"
 cp "$SRC"/references/* "$DST/references/"
+cp "$SRC"/scripts/* "$DST/scripts/"
 
 diff -r "$SRC" "$DST"   # 无输出 = 一致
 ```
@@ -36,22 +37,22 @@ diff -r "$SRC" "$DST"   # 无输出 = 一致
 
 | 技能 | 作用 | 入口 |
 |---|---|---|
-| `WorkBuddy_Video_Workflow` | 视频制作流程：选题 → 脚本 → 分镜 → 素材 → 剪辑合成 → 质检 → 交付 → 发布复盘 | `SKILL.md` |
+| `workbuddy-video-workflow` | 视频制作流程：选题 → 脚本 → 分镜 → 素材 → 剪辑合成 → 质检 → 交付 → 发布复盘 | `SKILL.md` |
 
 ## 新增一个技能
 
-1. 在 `WorkBuddy_Skills/` 下建 `<SkillName>/`，写 `SKILL.md`
+1. 在 `skills/` 下建 `<skill-name>/`（hyphen-case 小写），写 `SKILL.md`
 2. `SKILL.md` 必须带 YAML frontmatter：
 
 ```yaml
 ---
-name: <SkillName>            # 必须与目录名一致
-description: <一句话说清"什么时候该用它">   # 决定会不会被触发，写具体场景与关键词
+name: <skill-name>           # 必须与目录名一致，且为小写连字符格式
+description: <一句话说清"什么时候该用它">   # 决定会不会被触发，写具体场景与关键词；不能含尖括号
 agent_created: true
 ---
 ```
 
-3. 详细内容放 `references/`，`SKILL.md` 只留主干 + 指向（**加载时只读 SKILL.md，references 按需打开**）
+3. 可执行代码放 `scripts/`，详细文档放 `references/`，`SKILL.md` 只留主干 + 指向（**加载时只读 SKILL.md，references 按需打开**）
 4. 同步到用户级（见上）
 
 ## 写作约定
@@ -67,16 +68,16 @@ agent_created: true
 ## 维护检查
 
 ```bash
-SK="skills/WorkBuddy_Skills/WorkBuddy_Video_Workflow"
+SK="skills/workbuddy-video-workflow"
 
 # 1. 两份是否一致
-diff -r "$SK" "$HOME/.workbuddy-ai/skills/WorkBuddy_Video_Workflow"
+diff -r "$SK" "$HOME/.workbuddy-ai/skills/workbuddy-video-workflow"
 
 # 2. 有没有残留项目特定路径（应该为 0）
-grep -c "reference/\|remotion/\|scripts/" "$SK/SKILL.md"
+grep -c "reference/\|remotion/\|films/" "$SK/SKILL.md"
 
 # 3. references 里的链接是否都存在
-grep -oE "references/[a-zA-Z0-9._-]+" "$SK/SKILL.md" | sort -u | while read f; do
+grep -oE "references/[a-zA-Z0-9._/-]+" "$SK/SKILL.md" | sort -u | while read f; do
   [ -f "$SK/$f" ] || echo "MISS $f"
 done
 ```
