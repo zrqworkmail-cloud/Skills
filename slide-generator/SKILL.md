@@ -1,5 +1,5 @@
 ---
-name: ppt-production-skill
+name: slide-generator
 description: "根据用户提供的 PowerPoint 模板制作或重做科研汇报。适用于要求继承模板风格、先做样页审核、交付原生可编辑 PPTX 或 GPT Image 整页 PNG 的任务。先定向调研与模板分析，再制作一张样页，批准后扩展并渲染验收。不用于普通 PPT 问答、实验运行或不涉及模板继承的文档任务。"
 ---
 
