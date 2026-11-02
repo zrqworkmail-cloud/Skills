@@ -34,8 +34,11 @@ export const Llama4MoEShot03: React.FC = () => {
   const legT = easeOut(seg(f, 138, 158));
 
   // 极暗星云做底纹
-  const proj = NODES.map((n) => project3(n, 2.9, 0.55 + 0.12 * (f / DUR), 0.04, 900, 520, 0.92));
-  const gasProj = GAS.map((g) => project3(g, 2.9, 0.55 + 0.12 * (f / DUR), 0.04, 900, 520, 0.92));
+  // 星云全程都在动：持续旋转 + 缓慢扩张（物体在动，不是镜头在动）
+  const rotY = 0.55 + 0.62 * (f / DUR);
+  const nebK = 0.9 + 0.14 * (f / DUR);
+  const proj = NODES.map((n) => project3(n, 2.9, rotY, 0.04, 900, 520, nebK));
+  const gasProj = GAS.map((g) => project3(g, 2.9, rotY, 0.04, 900, 520, nebK));
   const gasFill = ['url(#gasBlue)', 'url(#gasTeal)', 'url(#gasPurple)'];
   const DIM = 0.46;
 
@@ -222,9 +225,10 @@ export const Llama4MoEShot03: React.FC = () => {
         </div>
         <div style={{ fontFamily: CN, fontSize: 20, color: MUTED, marginTop: 6, letterSpacing: 1 }}>四个尺寸，最小只有 70 亿</div>
       </div>
-      <div style={{ position: 'absolute', left: 152, top: 610, opacity: tokenT }}>
+      <div style={{ position: 'absolute', left: 152, top: 598, opacity: tokenT }}>
         <div style={{ fontFamily: DISPLAY, fontSize: 46, fontWeight: 700, color: GOLD }}>1.0 – 1.4T</div>
-        <div style={{ fontFamily: CN, fontSize: 20, color: LIGHT, marginTop: 2, letterSpacing: 1 }}>训练 token，是同期模型的数倍</div>
+        <div style={{ fontFamily: CN, fontSize: 18, color: LIGHT, marginTop: 4, letterSpacing: 1 }}>训练 token = 模型读过的文字量</div>
+        <div style={{ fontFamily: CN, fontSize: 16, color: MUTED, marginTop: 3, letterSpacing: 1 }}>1 token ≈ 0.75 个英文词 · 约为 GPT-3 的 3–4 倍</div>
       </div>
 
       {/* 右：13B vs 175B 同心圆 */}
@@ -276,8 +280,9 @@ export const Llama4MoEShot03: React.FC = () => {
           letterSpacing: 1,
         }}
       >
-        圆面积 = 参数量，13 / 175 = 7.4%
+        圆面积 = 参数量 · 13 / 175 = 7.4%（稠密：全部参数都参与）
       </div>
+
     </SlideFrame>
   );
 };
