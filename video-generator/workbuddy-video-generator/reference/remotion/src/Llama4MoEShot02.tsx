@@ -40,6 +40,7 @@ export const Llama4MoEShot02: React.FC = () => {
   const relight = seg(f, 152, 198);
   const goldT = clamp01(1 - seg(f, 10, 44) + relight);
   const pop = Math.sin(Math.PI * clamp01((relight - 0.55) / 0.45));
+  const coreO = 1 - seg(f, 0, 26);
 
   const proj = NODES.map((n) => project3(n, CAM0, rotY, ROTX0, cx, 520, k));
   const gasProj = GAS.map((g) => project3(g, CAM0, rotY, ROTX0, cx, 520, k));
@@ -86,6 +87,11 @@ export const Llama4MoEShot02: React.FC = () => {
           <radialGradient id="goldHalo">
             <stop offset="0%" stopColor={GOLD_L} stopOpacity="0.95" />
             <stop offset="100%" stopColor={GOLD} stopOpacity="0" />
+          </radialGradient>
+          <radialGradient id="coreGlow">
+            <stop offset="0%" stopColor="#FFFFFF" stopOpacity="0.95" />
+            <stop offset="35%" stopColor="#FFE2A8" stopOpacity="0.55" />
+            <stop offset="100%" stopColor="#F5C26B" stopOpacity="0" />
           </radialGradient>
           <radialGradient id="vignette" cx="50%" cy="50%" r="62%">
             <stop offset="55%" stopColor="#000000" stopOpacity="0" />
@@ -153,6 +159,26 @@ export const Llama4MoEShot02: React.FC = () => {
             </React.Fragment>
           );
         })}
+
+        {/* 承接 Shot 01 结尾的“激活核心”，随开场淡出，保证切镜无缝 */}
+        {coreO > 0 && (
+          <>
+            <circle cx={cx} cy={520} r={30.6} fill="url(#coreGlow)" opacity={0.7 * coreO} />
+            <circle cx={cx} cy={520} r={4.6} fill={WHITE} opacity={0.95 * coreO} />
+            <text
+              x={cx}
+              y={529}
+              textAnchor="middle"
+              fontFamily={CN}
+              fontSize={13}
+              fontWeight={700}
+              fill={LIGHT}
+              opacity={0.85 * coreO}
+            >
+              激活
+            </text>
+          </>
+        )}
 
         <rect width={1920} height={1080} fill="url(#vignette)" />
       </svg>
@@ -229,19 +255,6 @@ export const Llama4MoEShot02: React.FC = () => {
       </div>
 
       {/* 右：实际是 MoE（完全出现后发亮） */}
-      {glow > 0 && (
-        <div
-          style={{
-            position: 'absolute',
-            left: NX - 80,
-            top: 512,
-            width: BW + 180,
-            height: 210,
-            background: `radial-gradient(52% 62% at 22% 46%, rgba(245,194,107,${0.2 * glow}) 0%, rgba(245,194,107,0) 72%)`,
-            pointerEvents: 'none',
-          }}
-        />
-      )}
       <div
         style={{
           position: 'absolute',
@@ -253,7 +266,7 @@ export const Llama4MoEShot02: React.FC = () => {
           fontWeight: 700,
           color: GOLD,
           letterSpacing: 2,
-          textShadow: `0 0 ${30 * glow}px rgba(245,194,107,${0.8 * glow})`,
+          textShadow: `0 0 ${13 * glow}px rgba(245,194,107,${0.5 * glow})`,
         }}
       >
         实际是 MoE
@@ -283,8 +296,8 @@ export const Llama4MoEShot02: React.FC = () => {
                 height: 24,
                 borderRadius: 12,
                 background: GOLD,
-                opacity: (0.22 + 0.3 * glow) * segIn,
-                filter: `blur(${3 + 3 * glow}px)`,
+                opacity: (0.2 + 0.16 * glow) * segIn,
+                filter: `blur(${2 + 2 * glow}px)`,
               }}
             />
             <div
@@ -311,7 +324,7 @@ export const Llama4MoEShot02: React.FC = () => {
           fontFamily: CN,
           fontSize: 22,
           color: GOLD,
-          textShadow: `0 0 ${18 * glow}px rgba(245,194,107,${0.55 * glow})`,
+          textShadow: `0 0 ${10 * glow}px rgba(245,194,107,${0.35 * glow})`,
         }}
       >
         400B 一个没少 —— 每次只算 17B（4.25%）

@@ -20,6 +20,7 @@ import { Llama4MoESampleV5 } from './Llama4MoESampleV5';
 import { Llama4MoESampleV6 } from './Llama4MoESampleV6';
 import { Llama4MoESampleV7 } from './Llama4MoESampleV7';
 import { Llama4MoEShot02 } from './Llama4MoEShot02';
+import { Llama4MoEShot03 } from './Llama4MoEShot03';
 import { FontTest } from './FontTest';
 
 // 与管线原生规格严格一致：704×1280 / 16fps / 121 帧 = 7.5625s
@@ -205,6 +206,14 @@ export const Root: React.FC = () => (
       id="Llama4MoEShot02"
       component={Llama4MoEShot02}
       durationInFrames={240}
+      fps={24}
+      width={1920}
+      height={1080}
+    />
+    <Composition
+      id="Llama4MoEShot03"
+      component={Llama4MoEShot03}
+      durationInFrames={192}
       fps={24}
       width={1920}
       height={1080}

@@ -204,7 +204,9 @@ export const Llama4MoESampleV7: React.FC = () => {
           if (!a) return null;
           const dist = Math.hypot(a.x - FX, a.y - FY);
           const lit = clamp01((waveR - dist) / 26);
-          const fp = clamp01((waveR - dist) / 70);
+          // 闪光按“点亮后 18 帧”衰减，而不是按波半径——否则片尾会残留未衰减的光晕
+          const litFrame = 54 + ((dist - 10) / Math.max(1, R_MAX)) * (CAL_FRAME - 54);
+          const fp = clamp01((f - litFrame) / 18);
           if (lit <= 0) return null;
           // 近大远小：景深逐帧归一化，最近 7px / 最远 3px
           const dep = depOf(a.scale);
