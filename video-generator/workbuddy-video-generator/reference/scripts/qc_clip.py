@@ -28,7 +28,9 @@ import numpy as np
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import _film   # noqa: E402
 
-FF = "D:/tools/ffmpeg/bin/ffmpeg.exe"
+FF = os.environ.get("FFMPEG_PATH") or subprocess.check_output(
+    [sys.executable, "-c", "import imageio_ffmpeg;print(imageio_ffmpeg.get_ffmpeg_exe())"]
+).decode().strip()
 FPS = 16
 QUIET = 0.0012        # 帧间平均绝对差阈值（240×428 灰度 0..1）
 STILL_LIMIT = 3.0

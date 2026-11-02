@@ -6,7 +6,7 @@ const puppeteer = require('puppeteer-core');
 
 const ROOT = path.resolve(__dirname, '..');
 const OUT = path.join(ROOT, 'out');
-const FFMPEG = 'D:/tools/ffmpeg/bin/ffmpeg.exe';
+const FFMPEG = process.env.FFMPEG_PATH || 'ffmpeg';
 const CHROME = 'C:/Program Files/Google/Chrome/Application/chrome.exe';
 const FPS = 24;
 const START = 17.0899;          // s3 起点

@@ -7,7 +7,7 @@ const puppeteer = require('puppeteer-core');
 const ROOT = path.resolve(__dirname, '..');
 const SRC = path.join(ROOT, 'src');
 const OUT = path.join(ROOT, 'out');
-const FFMPEG = 'D:/tools/ffmpeg/bin/ffmpeg.exe';
+const FFMPEG = process.env.FFMPEG_PATH || 'ffmpeg';
 const CHROME = 'C:/Program Files/Google/Chrome/Application/chrome.exe';
 
 const PAGE = process.argv[2] || 'index.html';

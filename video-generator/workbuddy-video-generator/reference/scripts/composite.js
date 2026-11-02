@@ -5,7 +5,7 @@ const { spawn } = require('child_process');
 const puppeteer = require('puppeteer-core');
 
 const { FILM, SRC, OUT } = require('./_film');
-const FFMPEG = 'D:/tools/ffmpeg/bin/ffmpeg.exe';
+const FFMPEG = process.env.FFMPEG_PATH || 'ffmpeg';
 const CHROME = 'C:/Program Files/Google/Chrome/Application/chrome.exe';
 
 const FPS = Number(process.argv[2] || 30);

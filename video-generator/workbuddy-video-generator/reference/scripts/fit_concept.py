@@ -18,7 +18,9 @@ import sys
 
 import _film
 
-FF = "D:/tools/ffmpeg/bin/ffmpeg.exe"
+FF = os.environ.get("FFMPEG_PATH") or subprocess.check_output(
+    [sys.executable, "-c", "import imageio_ffmpeg;print(imageio_ffmpeg.get_ffmpeg_exe())"]
+).decode().strip()
 
 
 def fit(sid, src, bottom=100):

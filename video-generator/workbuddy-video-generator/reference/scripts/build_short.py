@@ -20,8 +20,10 @@ import sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import _film   # noqa: E402
 
-FF = "D:/tools/ffmpeg/bin/ffmpeg.exe"
-FFPROBE = "D:/tools/ffmpeg/bin/ffprobe.exe"
+FF = os.environ.get("FFMPEG_PATH") or subprocess.check_output(
+    [sys.executable, "-c", "import imageio_ffmpeg;print(imageio_ffmpeg.get_ffmpeg_exe())"]
+).decode().strip()
+FFPROBE = os.environ.get("FFPROBE_PATH") or FF.replace("ffmpeg", "ffprobe")
 FPS = 24
 W, H = 1080, 1920
 

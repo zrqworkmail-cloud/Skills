@@ -428,5 +428,7 @@ ffmpeg -i assets/audio/VibeKnowledgeBGM_20min.m4a -t <成片时长> \
 | 技能维护 / 同步 / 公开镜像 | [`references/resources.md`](./references/resources.md) |
 
 > 公开仓很大（含几十 MB 素材）时**别硬 clone**——传输中断是常态，改走 Git Data API 增量快照（只传变化的 blob）；上传要用 `git cat-file` 取规范化字节，API 偶发 `EOF` 要带重试。详见 `references/resources.md`。
+>
+> **公开前必须清掉本机痕迹**：解释器用 `sys.executable`，外部二进制（ffmpeg/ffprobe/浏览器）走"环境变量 → 库自带 → PATH"三级解析，临时目录用 `os.tmpdir()`，文档示例用相对路径。**写死外部二进制路径不只是泄漏，还会让公开仓 clone 下来直接跑不起来**（那台机器上路径变了就失效，且报错只说"找不到文件"）。核验要**在目标环境实际解析并执行一次**（`ffmpeg -version` 能出版本号才算过），并**扫全仓含未改动的历史文件**——只清本轮 diff 会漏掉没人再跑因而没人发现的死路径。
 
 **工具不限**：本文所有方法都可用任何工具实现——剪辑软件、渲染框架、AI 模型、甚至手工。工具换，流程和判据不换。

@@ -8,7 +8,7 @@ const fs=require('fs'), path=require('path');
 const {spawn}=require('child_process');
 const puppeteer=require('puppeteer-core');
 const { FILM, SRC, OUT } = require('./_film');
-const FF='D:/tools/ffmpeg/bin/ffmpeg.exe';
+const FF=process.env.FFMPEG_PATH||'ffmpeg';
 const CHROME='C:/Program Files/Google/Chrome/Application/chrome.exe';
 const sid=process.argv[2];
 const N=parseInt(process.argv[3]||'5',10);

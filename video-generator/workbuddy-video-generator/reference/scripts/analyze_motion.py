@@ -27,7 +27,9 @@ import sys
 import numpy as np
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-FF = "D:/tools/ffmpeg/bin/ffmpeg.exe"
+FF = os.environ.get("FFMPEG_PATH") or subprocess.check_output(
+    [sys.executable, "-c", "import imageio_ffmpeg;print(imageio_ffmpeg.get_ffmpeg_exe())"]
+).decode().strip()
 BASEDIR = os.path.join(ROOT, "out", "base")
 QCDIR = os.path.join(ROOT, "out", "qc")
 

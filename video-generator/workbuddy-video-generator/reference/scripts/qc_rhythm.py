@@ -23,7 +23,9 @@ import numpy as np
 import _film
 
 ROOT = _film.FILMROOT
-FF = "D:/tools/ffmpeg/bin/ffmpeg.exe"
+FF = os.environ.get("FFMPEG_PATH") or subprocess.check_output(
+    [sys.executable, "-c", "import imageio_ffmpeg;print(imageio_ffmpeg.get_ffmpeg_exe())"]
+).decode().strip()
 FPS = 24
 QUIET = 0.0012          # 帧间平均绝对差阈值（下采样 240x428 灰度 0..1），低于此视为"无变化"
 STILL_LIMIT = 3.0       # 最长静止上限（秒）

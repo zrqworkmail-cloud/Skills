@@ -5,7 +5,7 @@ const { execFileSync } = require('child_process');
 const puppeteer = require('puppeteer-core');
 
 const ROOT = path.resolve(__dirname, '..');
-const FF = 'D:/tools/ffmpeg/bin/ffmpeg.exe';
+const FF = process.env.FFMPEG_PATH || 'ffmpeg';
 
 (async () => {
   // 1. 从底板取一帧，中心裁成 3:4

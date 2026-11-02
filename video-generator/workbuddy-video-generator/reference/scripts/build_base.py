@@ -8,7 +8,9 @@ import json, os, shutil, subprocess, sys
 import _film
 
 ROOT = _film.FILMROOT
-FF = "D:/tools/ffmpeg/bin/ffmpeg.exe"
+FF = os.environ.get("FFMPEG_PATH") or subprocess.check_output(
+    [sys.executable, "-c", "import imageio_ffmpeg;print(imageio_ffmpeg.get_ffmpeg_exe())"]
+).decode().strip()
 AI = os.path.join(ROOT, "out", "ai")
 OUT = os.path.join(ROOT, "out", "base")
 FPS = 24                      # 成片帧率改为 24fps
