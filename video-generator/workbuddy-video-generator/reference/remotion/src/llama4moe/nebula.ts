@@ -121,7 +121,7 @@ export const REF_CAM = { camZ: 2.589, ry: 0.748, rx: 0.033, fx: 760, fy: 520 };
  * 17 个激活点：在**屏幕空间**按方位角等距取样（不是 3D 方位角）。
  * 3D 方位角经过透视后会被压向一侧，屏幕方位角才能保证画面上左右均匀。
  */
-export const GOLD_IDX: number[] = (() => {
+const GOLD_CAND: { i: number; a: number }[] = (() => {
   const cand = NODES.map((n, i) => {
     const p = project3(n, REF_CAM.camZ, REF_CAM.ry, REF_CAM.rx, REF_CAM.fx, REF_CAM.fy, 1);
     if (!p) return null;
@@ -132,5 +132,11 @@ export const GOLD_IDX: number[] = (() => {
     return { i, a: Math.atan2(dy, dx) };
   }).filter((o): o is { i: number; a: number } => o !== null);
   cand.sort((x, y) => x.a - y.a);
-  return Array.from({ length: 17 }, (_, k) => cand[Math.floor((k * cand.length) / 17)].i);
+  return cand;
 })();
+
+/** 按屏幕方位角等距取 count 个激活点（1 点 = 1B 的约定下，13 个点 = 13B） */
+export const pickGold = (count: number): number[] =>
+  Array.from({ length: count }, (_, k) => GOLD_CAND[Math.floor((k * GOLD_CAND.length) / count)].i);
+
+export const GOLD_IDX: number[] = pickGold(17);

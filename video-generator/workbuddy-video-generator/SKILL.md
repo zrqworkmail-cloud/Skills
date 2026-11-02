@@ -419,4 +419,6 @@ ffmpeg -i assets/audio/VibeKnowledgeBGM_20min.m4a -t <成片时长> \
 | 质检跑判据 | `scripts/qc_rhythm.py`（节奏体检） |
 | 技能维护 / 同步 / 公开镜像 | [`references/resources.md`](./references/resources.md) |
 
+> 公开仓很大（含几十 MB 素材）时**别硬 clone**——传输中断是常态，改走 Git Data API 增量快照（只传变化的 blob）；上传要用 `git cat-file` 取规范化字节，API 偶发 `EOF` 要带重试。详见 `references/resources.md`。
+
 **工具不限**：本文所有方法都可用任何工具实现——剪辑软件、渲染框架、AI 模型、甚至手工。工具换，流程和判据不换。

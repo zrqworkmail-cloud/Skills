@@ -49,6 +49,10 @@
 
 同一份清单还要清**身份信息**：提交身份、脚本署名里的真实姓名与邮箱走环境变量兜底（`GIT_NAME` / `GIT_EMAIL`），代码里只留占位。
 
-**快照按内容校验，不按文件数。** 源仓每天自动提交，快照不会自己跟上来——文件集合一致也可能有好几个文件停在上一版，同步后逐文件 `cmp` / `diff -r`。
+**快照按内容校验，不按文件数。** 源仓每天自动提交，快照不会自己跟上来——文件集合一致也可能有好几个文件停在上一版，同步后逐文件 `cmp` / `diff -r`。更硬的做法是**逐 blob sha 比对**：远端树的 sha 与本地 `git ls-tree` 的 sha 必须一一相等，差异为 0。
+
+⚠️ **公开仓太大时别硬 clone，走 Git Data API 增量快照。** 公开仓含几十 MB 不可再生物材（BGM 母版等）时，`git clone` 会在传输中断（`schannel: server closed abruptly` / `early EOF`），十几分钟白等——**失败的是传输，不是通道**。改用 API 只上传变化的 blob：取远端 ref → base_tree → 建 blob → 建新 tree（`base_tree` = 远端树，只覆盖变化项）→ 建 commit → PATCH ref（`force:false`，防覆盖）。本仓已备好脚本 `reference/scripts/push_snapshot.py`。
+
+两个必踩的坑：上传必须用 `git cat-file blob HEAD:<path>` 取**规范化后**的字节（工作区可能带 CRLF，直接传会得到不同的 blob sha）；API 偶发 `EOF` 必须带退避重试，别当成权限问题。
 
 **命名统一 `<领域>-generator`**，不用 `production` / `-skill` 后缀；同层级出现三种命名，读者找不到规律。**旧仓 archive ≠ 删除**：归档只是只读，URL 与内容仍公开，彻底删除要额外 `delete_repo` 权限。本地移除 remote 后仓库就是纯本地源，`git push` 无处可去，此后唯一出口是快照同步。
