@@ -19,6 +19,8 @@
 
 > 技能里嫁接的开源判据（anything2explainer、onetake 等）仅作参考，版权归原作者（MIT/Apache/PolyForm，见各仓库 LICENSE）。
 
+**嫁接上游技能要整包搬，别只搬 `SKILL.md`。** 上游技能的正文往往只是索引，真正内容在它自己的 `references/` 里——只搬主干等于"有目录没正文"，引用检查还会报一堆缺失链接。落成 `<技能名>/{SKILL.md, LICENSE, references/}` 标准结构，README 注明来源与许可；**判据是"引用条数 → 0 条失效"**，不是"文件搬过来了"。许可证也要看清：MIT / Apache 基本随便用，PolyForm 这类非商用许可在接商业选题前先确认。
+
 ## 技能本体放哪
 
 - **仓库副本**：仓库根目录本身（`SKILL.md` + `scripts/` + `references/`，进 Git，管版本）
@@ -39,7 +41,11 @@
 
 ## 公开镜像（想分享给别人时）
 
-私有仓是源，公开仓只是快照，用 `git archive HEAD | tar -x -C <公开仓>/<领域>-generator/<平台>-<领域>-generator` 单向导出，**不要用 submodule**（公开仓引私有仓，别人 clone 拉不下来）。公开前必须清掉本机绝对路径：Python 用 `sys.executable`、临时目录用 `os.tmpdir()`、浏览器路径走环境变量、文档里的命令示例改成相对路径，然后 `py_compile` + `node --check` + 全仓 grep 验证。注意本地路径有两种写法都要查：`C:/Users/...`（Windows）和 `/c/Users/...`（Git Bash）——只清一种会得到"已经清理过"的假象。
+私有仓是源，公开仓只是快照，用 `git archive HEAD | tar -x -C <公开仓>/<领域>-generator/<平台>-<领域>-generator` 单向导出，**不要用 submodule**（公开仓引私有仓，别人 clone 拉不下来）。
+
+⚠️ **改可见性前先清点仓库里装了什么**：工作流仓库不只装代码，`films/` 里是选题、文案、分镜，`docs/` 里是复盘，改成 public 时一起公开，且**子目录不能单独设权限**。要长期公开就把内容资产与代码分仓；只想给同事看工具，走快照（快照可以是私有仓）。
+
+公开前必须清掉本机绝对路径：Python 用 `sys.executable`、临时目录用 `os.tmpdir()`、浏览器路径走环境变量、文档里的命令示例改成相对路径，然后 `py_compile` + `node --check` + 全仓 grep 验证。注意本地路径有两种写法都要查：`C:/Users/...`（Windows）和 `/c/Users/...`（Git Bash）——只清一种会得到"已经清理过"的假象。
 
 同一份清单还要清**身份信息**：提交身份、脚本署名里的真实姓名与邮箱走环境变量兜底（`GIT_NAME` / `GIT_EMAIL`），代码里只留占位。
 
