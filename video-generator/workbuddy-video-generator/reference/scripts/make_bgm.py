@@ -2,7 +2,8 @@
 # -*- coding: utf-8 -*-
 """用【用户原始音乐】构建 BGM（bgm_final.m4a）。
 
-源：D:/Users/Admin/Music/VibeKnowledgeBGM.mp4（用户指定，2:30）。
+源：用户指定的原始音乐文件（路径经环境变量 `VIBE_BGM_SRC` 传入，默认取仓库内
+    `assets/audio/` 下的同名母版），时长 2:30。
 做法：
   1) 取音质最好的音轨解码为 bgm_source.wav；
   2) 谱通量 onset 检测 + 暴力搜索起点 M0，使 9 个镜头的剪辑点尽量落在鼓点上
@@ -12,6 +13,7 @@
   4) 轻量归一化到约 -16 LUFS + 头尾淡入淡出，写 bgm_final.m4a。
 
 用法：python scripts/make_bgm.py
+      环境变量：VIBE_BGM_SRC（源音乐路径）、VIBE_FFMPEG（ffmpeg 可执行文件路径）
 """
 import json
 import os
@@ -21,8 +23,10 @@ import wave
 import numpy as np
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-FF = "D:/tools/ffmpeg/bin/ffmpeg.exe"
-SRC_MUSIC = "D:/Users/Admin/Music/VibeKnowledgeBGM.mp4"
+FF = os.environ.get("VIBE_FFMPEG") or "ffmpeg"
+SRC_MUSIC = os.environ.get("VIBE_BGM_SRC") or os.path.join(
+    ROOT, "assets", "audio", "VibeKnowledgeBGM_20min.m4a"
+)
 OUTDIR = os.path.join(ROOT, "out", "audio")
 SRC_WAV = os.path.join(OUTDIR, "bgm_source.wav")
 OUT_M4A = os.path.join(OUTDIR, "bgm_final.m4a")

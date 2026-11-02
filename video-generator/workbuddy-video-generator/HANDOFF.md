@@ -8,9 +8,7 @@
 
 ## 0. 项目在哪
 
-```
-C:\Users\Admin\WorkBuddy AI\Workbuddy\vibe-knowledge-video\
-```
+仓库根 = 本文件所在目录（`vibe-knowledge-video/`），下面所有路径都相对它。
 
 这是**唯一源**（纯本地，无 remote）。同一份内容另有公开镜像：
 `https://github.com/zrqworkmail-cloud/Skills` 的 `video-generator/workbuddy-video-generator/`（单向快照，**不要在这里改**）。
@@ -102,8 +100,8 @@ C:\Users\Admin\WorkBuddy AI\Workbuddy\vibe-knowledge-video\
 | 依赖 | 路径 / 说明 |
 |---|---|
 | Node + Remotion | `reference/remotion/`，已装 `node_modules` |
-| Chromium | `C:/Users/Admin/AppData/Local/ms-playwright/chromium-1248/chrome-win64/chrome.exe` |
-| Python | `C:/Users/Admin/.workbuddy-ai/binaries/python/versions/3.13.12/python.exe`（numpy / imageio-ffmpeg 可用） |
+| Chromium | 用环境变量 `CHROME_EXECUTABLE_PATH` 指向本机 Playwright 的 chromium（**不写死绝对路径**，换机器就失效） |
+| Python | 本机 WorkBuddy 托管的 Python 3.13（numpy / imageio-ffmpeg 可用），用 `sys.executable` 取，不用写死路径 |
 | ffmpeg | 用 `imageio_ffmpeg.get_ffmpeg_exe()`，系统无 ffmpeg |
 | BGM | `assets/audio/VibeKnowledgeBGM_20min.m4a`（20:00，44.1kHz） |
 | 音效 | `assets/audio/sfx/*.wav`（8 个，纯 numpy 合成，无版权问题） |
@@ -111,8 +109,8 @@ C:\Users\Admin\WorkBuddy AI\Workbuddy\vibe-knowledge-video\
 ### 5.2 渲染一镜
 
 ```bash
-cd "C:/Users/Admin/WorkBuddy AI/Workbuddy/vibe-knowledge-video/reference/remotion"
-export CHROME_EXECUTABLE_PATH="C:/Users/Admin/AppData/Local/ms-playwright/chromium-1248/chrome-win64/chrome.exe"
+cd reference/remotion
+export CHROME_EXECUTABLE_PATH="<本机 Playwright chromium 可执行文件路径>"
 export CHROME_HEADLESS=true
 ./node_modules/.bin/remotion render Llama4MoEShot05 out/shot05.mp4 --concurrency=4
 ```
@@ -170,11 +168,10 @@ python films/llama-tech-lineage/qc_film.py <成片>
 
 ## 7. 交接步骤（国内版）
 
-1. 用国内版 WorkBuddy **打开同一个文件夹**：
-   `C:\Users\Admin\WorkBuddy AI\Workbuddy\vibe-knowledge-video`
+1. 用国内版 WorkBuddy **打开仓库根目录**（就是本文件所在目录）
 2. 让它先读这份 `HANDOFF.md`，再读 `films/llama4-moe/分镜_v2_3min.md`。
 3. 需要的技能（如果国内版没有，装到 `~/.workbuddy-ai/skills/`）：
-   - `workbuddy-video-workflow`（本地已有副本：`C:\Users\Admin\.workbuddy-ai\skills\workbuddy-video-workflow`）
+   - `workbuddy-video-workflow`（本地已有副本：`~/.workbuddy-ai/skills/workbuddy-video-workflow`）
 4. 直接说「继续做 Shot 05」即可，上下文都在这份文档里。
 
 > 注意：用户级记忆（`~/.workbuddy-ai/user-.../MEMORY.md`、`SOUL.md`）属于当前客户端，国内版不一定读得到。**所有关键约定都已经写进本文件**，不依赖记忆。
