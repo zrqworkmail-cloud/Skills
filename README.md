@@ -20,8 +20,9 @@
 单一/通用技能                    多平台技能
 <领域>-generator/                <领域>-generator/
 ├── SKILL.md                     └── <平台>-<领域>-generator/
-├── references/                      ├── README.md
-└── scripts/                         ├── skills/
+├── references/                      ├── SKILL.md      ← 技能本体在根
+└── scripts/                         ├── references/ + scripts/ + assets/
+                                     ├── README.md
                                      ├── docs/
                                      ├── films/ 或 output/
                                      └── reference/
@@ -38,7 +39,7 @@
 
 ## 用法
 
-各子目录的 README 里写了具体怎么用。技能类子目录通常只需把 `SKILL.md` 与 `references/` 拷到对应 agent 的技能目录。
+各子目录的 README 里写了具体怎么用。技能类子目录通常只需把 `SKILL.md`、`references/`、`scripts/`、`assets/` 拷到对应 agent 的技能目录（目录名用技能名，如 `~/.workbuddy-ai/skills/workbuddy-video-workflow/`）。
 
 ## 约定
 
