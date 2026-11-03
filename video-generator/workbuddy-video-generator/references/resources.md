@@ -16,6 +16,7 @@
 | `composition-and-light.md` | 构图与光、主体尺寸三档、量化判据 | 设计画面时 |
 | `lessons.md` | 踩坑与根因集 | 排查根因时 |
 | `../scripts/qc_rhythm.py` | 节奏体检脚本（最长连续冻结检测，改路径即用） | 质检阶段运行 |
+| `../scripts/gen_sfx.py` | 事件音效合成脚本（振荡器 + 包络，numpy 纯代码生成，无版权风险） | 剪辑合成阶段需要音效时 |
 
 > 技能里嫁接的开源判据（anything2explainer、onetake 等）仅作参考，版权归原作者（MIT/Apache/PolyForm，见各仓库 LICENSE）。
 
