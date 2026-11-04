@@ -1,0 +1,58 @@
+{
+  "_readme": "v9 机器契约模板：填完占位符并按 duration_plan 更新时长后才能使用。沿用既有字段；visual 与 motion.intent 同时设计信息和动作。STORYBOARD.md 由本文件与 beat_timeline 生成，不手写；生成器的 animated 标签不是审批结果，实际看 review_log。cut_grid 决定切点审计模式，audio.mode 决定声音路线。motion 只提供像素检查参数，不自动判语义。",
+  "id": "<project-slug>",
+  "title": "<片名>",
+  "created": "<YYYY-MM-DD>",
+  "status": "outline",
+  "canvas": { "w": 1080, "h": 1920, "fps": 30 },
+  "duration_lock": "content",
+  "duration_s": 0,
+  "cut_grid": "caption",
+  "audio": {
+    "mode": "none",
+    "mix": "remotion/public/audio/mix.wav",
+    "bed": "build/audio/bed.wav",
+    "note": "remotion=渲染内嵌 / post_mux=静音渲染后封装 / none=确实无音轨；有音轨时使用相应真实文件，无音轨不伪造音床。音乐由用户自备，是否去人声按brief；私有路径不提交。"
+  },
+  "pipeline": "P3",
+  "sources": [
+    { "name": "<素材或数据名>", "kind": "image|video|data|audio", "note": "<来源链接、时间、许可、口径；示意与事实分开>" }
+  ],
+  "shots": [
+    {
+      "id": "s00_<slug>",
+      "act": "<本段叙事作用>",
+      "dur_s": 4.2,
+      "narration": "<主要解说或屏幕句；不与图形标签重复堆字>",
+      "visual": "<主体与条件；初态→可见变化→结果；观众猜、比或看懂什么；如何接续前后镜。不强制纸面载体>",
+      "tool": "<imagen|wan-i2v|remotion|footage|chart>",
+      "camera_move": "<allowed|forbidden>",
+      "ui_rects": [],
+      "motion": {
+        "kind": "anim",
+        "intent": "<哪个关系变化、为何此时发生、关键时点或帧、结果观察时间；maxHoldS须符合实际设计，不为过线补章>",
+        "maxHoldS": 2.0
+      },
+      "source_note": "<关键断言的原始来源、单位分母、适用边界；示意模型明确标示意>"
+    },
+    {
+      "id": "s01_<slug>",
+      "act": "比较结果",
+      "dur_s": 5.0,
+      "narration": "<引导观察同一主体结果的下一句>",
+      "visual": "<延续上一镜主体与同一尺度，停留供比较；不换成一张无关新卡>",
+      "tool": "remotion",
+      "camera_move": "forbidden",
+      "ui_rects": [],
+      "motion": {
+        "kind": "hold",
+        "intent": "示例：整镜5秒有意停留供阅读与比较，无需闪光标；填入实际读字量、比较任务和样片依据后确认上限，不照抄时长",
+        "maxHoldS": 5.0
+      },
+      "source_note": "<沿用哪个来源／示意条件；本镜新增断言另核实>"
+    }
+  ],
+  "known_gaps": [
+    "<记录实际未核实事实、未完成连播或听审、工具覆盖不足及处理方式；没有数据不宣称效果已验证>"
+  ]
+}
