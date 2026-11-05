@@ -29,25 +29,26 @@
 
 技能本体在**平台包根**，不再套一层 `skills/`；拷贝安装时整目录复制即可。
 
-### 功能层共享素材
+### 功能层：自备音轨
 
 ```
 video-generator/
-├── assets/audio/                     ← 跨平台共用：VibeKnowledgeBGM_20min.m4a + README.md
+├── assets/audio/                     ← 自备音轨指引 README.md + .gitignore（不含音频文件）
 ├── workbuddy-video-generator/        ← 平台包（自有 assets/audio/sfx/ 不共享）
 └── qoder-video-generator/            ← 平台包
 ```
 
-`assets/audio/VibeKnowledgeBGM_20min.m4a` 是账号听感资产，
-**既不在 qoder 包内也不在 workbuddy 包内**。`workbuddy-video-generator` 默认
-引用它；`qoder-video-generator` 按「用户自备配乐、不代找不替换」的口径默认不
-引用，需要时可复用。授权状态见 [assets/audio/README.md](assets/audio/README.md)
-与根 [THIRD_PARTY_NOTICES.md](../THIRD_PARTY_NOTICES.md)。
+**本仓不分发任何 BGM 音频文件。** 原随仓母版因来源与授权无法确认已移除，
+使用者须自备授权明确的音轨。功能层目录保留 `README.md` 与 `.gitignore`
+（排除常见音频格式，防误提交），既不在 qoder 包内也不在 workbuddy 包内。
 
-引用方式：脚本按 `VIBE_BGM` / `VIBE_BGM_SRC` 环境变量 → 技能包内 `assets/audio/`
-→ 功能层 `../assets/audio/` 三级解析。这样本地源仓（仓库根即技能包）与公开仓
-（功能/平台两级）两种布局都能跑；单独拷贝一个平台包时请一并带上共享目录，
-或用环境变量指向自备音轨。
+- `workbuddy-video-generator` 的流程引用自备音轨；`qoder-video-generator` 按
+  「用户自备配乐、不代找不替换」口径运行。两者都不依赖仓库内置音频。
+- 引用方式：脚本按 `VIBE_BGM` / `VIBE_BGM_SRC` → 技能包内 `assets/audio/` →
+  功能层 `../assets/audio/` 三级解析，兼容「本地源仓根即技能包」与公开仓两级
+  布局；全缺失时明确报错，不静默合成顶替。
+- 授权责任见 [assets/audio/README.md](assets/audio/README.md) 与根
+  [THIRD_PARTY_NOTICES.md](../THIRD_PARTY_NOTICES.md)。
 
 ## 约定
 

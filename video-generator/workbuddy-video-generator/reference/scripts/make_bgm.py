@@ -2,9 +2,9 @@
 # -*- coding: utf-8 -*-
 """用【用户原始音乐】构建 BGM（bgm_final.m4a）。
 
-源：用户指定的原始音乐文件（路径经环境变量 `VIBE_BGM` / `VIBE_BGM_SRC` 传入，
-    否则依次回退到技能包内 `assets/audio/` 与功能层共享
-    `video-generator/assets/audio/` 下的同名母版），时长 2:30。
+源：**自备音轨**（公开镜像不含 BGM 音频）。路径经环境变量 `VIBE_BGM` /
+    `VIBE_BGM_SRC` 传入，否则依次回退到技能包内 `assets/audio/` 与功能层
+    `../assets/audio/`；全缺失即报错，不合成顶替。授权由使用者自行确认。
 做法：
   1) 取音质最好的音轨解码为 bgm_source.wav；
   2) 谱通量 onset 检测 + 暴力搜索起点 M0，使 9 个镜头的剪辑点尽量落在鼓点上
@@ -25,20 +25,30 @@ import numpy as np
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 FF = os.environ.get("VIBE_FFMPEG") or "ffmpeg"
+AUDIO_EXT = (".m4a", ".mp3", ".wav", ".flac", ".aac", ".ogg", ".opus", ".aiff")
+
+
 def resolve_bgm():
-    """环境变量 → 包内 → 功能层共享；都不存在则明确报错。"""
-    name = "VibeKnowledgeBGM_20min.m4a"
-    candidates = [
-        os.environ.get("VIBE_BGM") or os.environ.get("VIBE_BGM_SRC"),
-        os.path.join(ROOT, "assets", "audio", name),
-        os.path.join(ROOT, "..", "assets", "audio", name),
-    ]
-    for p in candidates:
-        if p and os.path.isfile(p):
-            return p
+    """自备音轨：环境变量 → 包内 assets/audio/ → 功能层 ../assets/audio/。
+
+    公开镜像不分发 BGM 音频，因此不假设任何具体文件名；扫描目录时只看
+    顶层文件，跳过 sfx/ 等子目录（那是平台包自有的音效）。
+    """
+    env = os.environ.get("VIBE_BGM") or os.environ.get("VIBE_BGM_SRC")
+    if env:
+        if not os.path.isfile(env):
+            raise FileNotFoundError(f"VIBE_BGM 指向的音轨不存在：{env}")
+        return env
+    for d in (os.path.join(ROOT, "assets", "audio"),
+              os.path.join(ROOT, "..", "assets", "audio")):
+        if os.path.isdir(d):
+            for fn in sorted(os.listdir(d)):
+                p = os.path.join(d, fn)
+                if os.path.isfile(p) and fn.lower().endswith(AUDIO_EXT):
+                    return p
     raise FileNotFoundError(
-        "找不到 BGM 母版。请设置 VIBE_BGM 指向自备音轨，或把母版放到 "
-        "assets/audio/（本地源仓）或 video-generator/assets/audio/（公开仓）。"
+        "找不到 BGM 音轨。公开镜像不分发音频，请自备授权明确的音轨并 "
+        "设置 VIBE_BGM，或放到 assets/audio/ / 功能层 ../assets/audio/。"
     )
 
 

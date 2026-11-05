@@ -5,9 +5,10 @@
 为什么需要这条通道：
   源仓是纯本地源（origin 已移除），对外同步要走公开仓快照
   （`git archive HEAD | tar -x -C <公开仓>/<领域>-generator/<平台>-<领域>-generator`）。
-  快照的标准做法是 clone 公开仓再覆盖目录，但公开仓含几十 MB 的不可再生素材
-  （BGM 母版等），clone 常常在传输中断（`schannel: server closed abruptly` / `early EOF`），
-  一次克隆可能耗十几分钟且最终失败。
+  快照的标准做法是 clone 公开仓再覆盖目录，但私有源仓常含几十 MB 的不可再生
+  素材（如自备 BGM 母版），clone 可能在传输中断（`schannel` / `early EOF`）。
+  ⚠️ 公开镜像自 2026-11-05 起**不分发 BGM 音频**：EXCLUDE_AUDIO 会把源仓里的
+  音频文件挡在快照外，避免授权不明的音轨被推回公开仓。
 
   本脚本改用 GitHub Git Data API 做**增量**提交：
   只上传发生变化的 blob，不下载整仓，与「快照」语义等价但不受大文件拖累。
@@ -68,8 +69,15 @@ def git(*args, binary=False):
     return p.stdout if binary else p.stdout
 
 
+# 授权不明 / 体积大的自备音轨不进公开镜像（用户自备，不随仓分发）
+AUDIO_EXT = {".m4a", ".mp3", ".wav", ".flac", ".aac", ".ogg", ".opus", ".aiff"}
+
+
 def changed_files(base):
-    """base 为空时取 HEAD~1..HEAD；否则取 base..HEAD。"""
+    """base 为空时取 HEAD~1..HEAD；否则取 base..HEAD。
+
+    过滤掉音频文件：公开镜像改为「自备音轨」，本地源仓的母版不能再被推回去。
+    """
     rng = f"{base}..HEAD" if base else "HEAD~1..HEAD"
     raw = git("diff", "--name-status", rng)
     out = []
@@ -77,7 +85,11 @@ def changed_files(base):
         if not line.strip():
             continue
         parts = line.split("\t")
-        out.append((parts[0][0], parts[-1]))
+        status, path = parts[0][0], parts[-1]
+        if os.path.splitext(path)[1].lower() in AUDIO_EXT:
+            print(f"  跳过（自备音轨不进公开镜像）{path}")
+            continue
+        out.append((status, path))
     return out
 
 

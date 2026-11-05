@@ -22,7 +22,7 @@
 Skills/
 ├── <功能>-generator/                    ← 一级：功能（video / slide / ...）
 │   ├── README.md                        ← 领域索引
-│   ├── assets/                          ← 功能层共享素材（跨平台公用，如 BGM 母版）
+│   ├── assets/                          ← 功能层共享说明（如自备音轨指引；音频不入库）
 │   └── <平台>-<功能>-generator/         ← 二级：agent 平台，技能本体在根
 │       ├── SKILL.md                     ← 技能本体
 │       ├── README.md                    ← 安装、来源、边界
@@ -37,7 +37,7 @@ Skills/
 
 - 功能目录根**不放** `SKILL.md`；技能本体一律在平台子目录根。
 - 新增平台时，在同一功能目录下并列新增子目录，不改动已有平台包。
-- 各平台包内部自洽，可独立拷贝安装；**跨包共用素材放功能层 `assets/`**，由各包通过环境变量或相对回退引用，不写死绝对路径。
+- 各平台包内部自洽，可独立拷贝安装；**跨包共用的说明与约定放功能层 `assets/`**，由各包通过环境变量或相对回退引用，不写死绝对路径。音频等授权不明的素材一律不入库，改为使用者自备。
 
 ## 命名约定
 
@@ -47,11 +47,11 @@ Skills/
 
 ## 用法
 
-各平台子目录的 `README.md` 写了具体怎么用。通常只需把 `SKILL.md`、`references/`、`scripts/`、`assets/` 一起拷到对应 agent 的用户级技能目录，目录名保持与技能包同名；若该领域有功能层共享素材（如 `video-generator/assets/audio/`），需一并拷贝或用环境变量指向自备文件：
+各平台子目录的 `README.md` 写了具体怎么用。通常只需把 `SKILL.md`、`references/`、`scripts/`、`assets/` 一起拷到对应 agent 的用户级技能目录，目录名保持与技能包同名；若该领域要求自备素材（如视频的 BGM 音轨），按功能层 `assets/` 下的说明自行准备并用环境变量指向：
 
 ```bash
 cp -r video-generator/qoder-video-generator "$AGENT_USER_SKILLS_DIR/qoder-video-generator"
-# 如需 BGM 母版：cp -r video-generator/assets/audio "$PROJECT_ROOT/" # 或设置 VIBE_BGM
+# 自备 BGM 音轨：export VIBE_BGM=/path/to/your-track.m4a  # 见 video-generator/assets/audio/README.md
 ```
 
 ## 约定

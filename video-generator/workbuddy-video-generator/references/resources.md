@@ -5,7 +5,7 @@
 | 文件 | 内容 | 何时读 |
 |---|---|---|
 | `../SKILL.md` | 八阶段主干流程 + 判据速查 | **每次加载必读** |
-| `../../assets/audio/VibeKnowledgeBGM_20min.m4a`（功能层共享） | **BGM 音源母版**（20 分钟，44.1kHz 立体声）——账号统一听感，按成片时长截取，截断处补 1.2s 淡出 | 剪辑合成阶段 |
+| `../../assets/audio/README.md` | **自备音轨指引**——公开镜像不含 BGM 音频；自备长母版、按成片时长截取、截断处补 1.2s 淡出，授权自行确认 | 剪辑合成阶段 |
 | `retro-lessons.md` | 返工反推清单：9 类根因 × 用户原话 × 为什么第一版会错 × 修法，附出片前 6 项动手检查 | **开工前必读** |
 | `design-checklist.md` | 设计阶段自查，9 类根因各一句 | 开工前过一遍 |
 | `common-errors.md` | 高频错误速查（症状 → 根因 → 修法） | 出问题时查 |
@@ -56,7 +56,7 @@
 
 **快照按内容校验，不按文件数。** 源仓每天自动提交，快照不会自己跟上来——文件集合一致也可能有好几个文件停在上一版，同步后逐文件 `cmp` / `diff -r`。更硬的做法是**逐 blob sha 比对**：远端树的 sha 与本地 `git ls-tree` 的 sha 必须一一相等，差异为 0。
 
-⚠️ **公开仓太大时别硬 clone，走 Git Data API 增量快照。** 公开仓含几十 MB 不可再生物材（BGM 母版等）时，`git clone` 会在传输中断（`schannel: server closed abruptly` / `early EOF`），十几分钟白等——**失败的是传输，不是通道**。改用 API 只上传变化的 blob：取远端 ref → base_tree → 建 blob → 建新 tree（`base_tree` = 远端树，只覆盖变化项）→ 建 commit → PATCH ref（`force:false`，防覆盖）。本仓已备好脚本 `reference/scripts/push_snapshot.py`。
+⚠️ **含大体积素材的仓库别硬 clone，走 Git Data API 增量快照。** 私有源仓含几十 MB 不可再生素材（如自备 BGM 母版）时，`git clone` 会在传输中断（公开镜像已移除音频，但含大素材的其他仓同理）（`schannel: server closed abruptly` / `early EOF`），十几分钟白等——**失败的是传输，不是通道**。改用 API 只上传变化的 blob：取远端 ref → base_tree → 建 blob → 建新 tree（`base_tree` = 远端树，只覆盖变化项）→ 建 commit → PATCH ref（`force:false`，防覆盖）。本仓已备好脚本 `reference/scripts/push_snapshot.py`。
 
 两个必踩的坑：上传必须用 `git cat-file blob HEAD:<path>` 取**规范化后**的字节（工作区可能带 CRLF，直接传会得到不同的 blob sha）；API 偶发 `EOF` 必须带退避重试，别当成权限问题。
 

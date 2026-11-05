@@ -15,11 +15,12 @@
 > `SKILL.md` / `references/` / `scripts/` 的加载。若需商用且不愿逐项核权，
 > 将它们从分发副本中排除是最简单的做法。
 
-## 2. 音频素材
+## 2. 音频素材（不随仓分发）
 
-| 文件 | 状态 |
-|---|---|
-| `video-generator/assets/audio/VibeKnowledgeBGM_20min.m4a`（38.1 MB，功能层共享） | 由仓库维护者自备并随仓提供，用于流程复现。**本仓未声明其来源、作者或授权范围**，不授予任何超出原始权利人的音乐使用权。使用者须自行向权利人确认；商用前尤其需要核实。详见该目录 `README.md` |
+本仓**不含任何 BGM 音频文件**。原 `video-generator/assets/audio/VibeKnowledgeBGM_20min.m4a`
+（38.1 MB）因**来源、作者与授权范围无法确认**已移除，不通过本仓授予任何音乐
+使用权。使用者须自备授权明确的音轨，并自行核实商用与公开投稿的授权范围；
+放置方式与 `.gitignore` 见 `video-generator/assets/audio/README.md`。
 
 ## 3. 未随仓分发、需使用者自备
 
@@ -30,10 +31,11 @@
 | 模型权重 | Wan2.2 I2V FP8 HIGH/LOW、umt5_xxl、Wan2.1 VAE、Kokoro v1.0 onnx/voices 等均不在仓内，按各自上游许可获取 |
 | npm / pip 依赖 | Remotion、React、Puppeteer、python-pptx、numpy、Pillow、librosa 等仅通过包管理器安装，代码不随仓分发；许可见各包内 LICENSE |
 | 平台凭据 | GitHub token、抖音登录态、GPT Image / DashScope API key 等一律不入库，由使用者通过环境变量或平台凭据管理器提供 |
+| BGM 音轨 | 见第 2 节；自备、不入库、授权自负 |
 
 ## 4. 结论
 
 **本仓整体不得直接用于商业目的**，除非：① 取得 `onetake` 与
-`anything2explainer` 权利人的商业授权或将其移除；② 确认 BGM 的商用授权；
+`anything2explainer` 权利人的商业授权或将其移除；② 自备音轨并确认其商用授权；
 ③ 确认自备字体、模型与依赖的许可。个人学习与非商业研究在遵守上述条款的
 前提下允许。

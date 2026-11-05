@@ -247,11 +247,11 @@ agent_created: true
 
 ### 4.3 音频
 
-**BGM 是账号资产，不要每片现造。** 功能层共享 **20 分钟母版**：`video-generator/assets/audio/VibeKnowledgeBGM_20min.m4a`（44.1kHz 立体声 AAC）。它属于功能层、不属于任何平台包，两个视频技能包共用；授权状态见同目录 `README.md`。知识类成片（30s~4min）都远短于母版，标准做法是**按目标时长截取**：
+**BGM 是账号资产，不要每片现造；音轨须自备。** 公开镜像**不分发任何 BGM 音频**，请自备一段授权明确的音轨，用 `VIBE_BGM` 指向它（或放到 `assets/audio/`／功能层 `video-generator/assets/audio/`）。放置方式与授权责任见 [video-generator/assets/audio/README.md](../assets/audio/README.md)。知识类成片（30s~4min）远短于长母版，标准做法是**按目标时长截取**：
 
 ```bash
-# 母版位置：环境变量 > 技能包内 assets/audio/ > 功能层 ../assets/audio/
-BGM="${VIBE_BGM:-../assets/audio/VibeKnowledgeBGM_20min.m4a}"
+# 自备音轨：环境变量 > 技能包内 assets/audio/ > 功能层 ../assets/audio/
+BGM="${VIBE_BGM:-../assets/audio/<你的音轨>.m4a}"
 # 截取前 N 秒，末尾 1.2s 淡出，预留 -1dB 编码余量
 ffmpeg -i "$BGM" -t <成片时长> \
   -af "volume=-1dB,afade=t=out:st=<成片时长-1.2>:d=1.2" -c:a aac out.m4a
@@ -259,7 +259,7 @@ ffmpeg -i "$BGM" -t <成片时长> \
 
 混流铁律不变：用 `-t <成片时长>` 精确截断，**禁 `-shortest`**。
 
-⚠️ **母版必须入库、跟着仓库走**（放 `assets/`，不要放 `out/`）。落在产物目录会被忽略规则挡在库外，换台机器开工就没有 BGM，只能临时合成——账号的听感资产就断了一次。单独拷贝本平台包安装时，记得一并带上功能层 `video-generator/assets/audio/`，或用 `VIBE_BGM` 指向自备音轨；找不到母版时脚本会明确报错，不会静默合成顶替。
+⚠️ **换台机器开工前先备好音轨**：母版落在 `out/` 会被 `.gitignore` 挡在库外，临时合成会打断账号听感。找不到音轨时脚本明确报错，不会静默顶替。私有源仓可把自己的母版入库跟着仓库走；公开镜像只交付流程与判据，不交付音频。
 
 **只有换用比成片短的母版时**，才需要接续技术，三种做法按优先级：
 
@@ -443,7 +443,7 @@ ffmpeg -i "$BGM" -t <成片时长> \
 | 质检跑判据 | `scripts/qc_rhythm.py`（节奏体检） |
 | 技能维护 / 同步 / 公开镜像 | [`references/resources.md`](./references/resources.md) |
 
-> 公开仓很大（含几十 MB 素材）时**别硬 clone**——传输中断是常态，改走 Git Data API 增量快照（只传变化的 blob）；上传要用 `git cat-file` 取规范化字节，API 偶发 `EOF` 要带重试。详见 `references/resources.md`。
+> 公开仓或私有源仓含大体积素材时**别硬 clone**——传输中断是常态，改走 Git Data API 增量快照（只传变化的 blob）；上传要用 `git cat-file` 取规范化字节，API 偶发 `EOF` 要带重试。公开镜像已不分发 BGM 音频，但含大素材的其他仓仍适用。详见 `references/resources.md`。
 >
 > **公开前必须清掉本机痕迹**：解释器用 `sys.executable`，外部二进制（ffmpeg/ffprobe/浏览器）走"环境变量 → 库自带 → PATH"三级解析，临时目录用 `os.tmpdir()`，文档示例用相对路径。**写死外部二进制路径不只是泄漏，还会让公开仓 clone 下来直接跑不起来**（那台机器上路径变了就失效，且报错只说"找不到文件"）。核验要**在目标环境实际解析并执行一次**（`ffmpeg -version` 能出版本号才算过），并**扫全仓含未改动的历史文件**——只清本轮 diff 会漏掉没人再跑因而没人发现的死路径。
 
