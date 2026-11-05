@@ -1,0 +1,21 @@
+# qoder-video-generator · Python 依赖
+# 安装：python -m pip install -r requirements.txt
+# 先跑 scripts/env_report.sh 只读探针，确认哪些阶段可用
+
+# --- 核心：测量、亮度、字幕、拼版 ---
+numpy>=1.24
+Pillow>=10
+
+# --- 音频分析 / 混音（analyze_bgm / audit_music_cut / mix_*）---
+soundfile>=0.12
+librosa>=0.10
+scipy>=1.11
+
+# --- ComfyUI 路线（wan_i2v.py，需本机 ComfyUI + Wan2.2 权重）---
+requests>=2.31
+
+# --- 可选：本地 TTS（tts_kokoro.py，需自备 onnx 模型）---
+# kokoro-onnx
+
+# 说明：.mjs 脚本只依赖 Node 内置模块（node:fs / node:path）。
+# ffmpeg / ffprobe / Node / Python 解释器均走环境变量或 PATH 探测。

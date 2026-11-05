@@ -14,7 +14,8 @@ import json, os, sys, time, glob, shutil
 import urllib.request, urllib.error
 
 SERVER = "http://127.0.0.1:8188"
-COMFY_OUT = r"D:\AI\ComfyUI\output\wan22"
+COMFY_OUT = os.environ.get("COMFY_OUTPUT_DIR",
+                          os.path.join(os.path.expanduser("~"), "ComfyUI", "output", "wan22"))
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import _film  # noqa: E402
 import wan22  # noqa: E402

@@ -2,7 +2,7 @@ const path = require('path');
 const puppeteer = require('puppeteer-core');
 const ROOT = path.resolve(__dirname, '..');
 (async () => {
-  const b = await puppeteer.launch({ executablePath: 'C:/Program Files/Google/Chrome/Application/chrome.exe', headless: true,
+  const b = await puppeteer.launch({ executablePath: process.env.CHROME_PATH || undefined, headless: true,
     args: ['--allow-file-access-from-files','--disable-gpu','--no-sandbox'] });
   const p = await b.newPage();
   await p.setViewport({ width: 1080, height: 1920, deviceScaleFactor: 1 });

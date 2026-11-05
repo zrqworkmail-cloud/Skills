@@ -7,7 +7,7 @@ const puppeteer = require('puppeteer-core');
 const { FILM, SRC, OUT } = require('./_film');
 
 const OUTC = path.join(OUT, 'ai', 'concepts');
-const CHROME = 'C:/Program Files/Google/Chrome/Application/chrome.exe';
+const CHROME = process.env.CHROME_PATH || undefined;
 const W = 704, H = 1280;
 
 const ids = (process.argv[2] || '').split(',').map(s => s.trim()).filter(Boolean);

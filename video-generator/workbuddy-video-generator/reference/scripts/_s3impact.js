@@ -1,7 +1,7 @@
 // 单帧覆盖层捕获（透明PNG）: node _s3impact.js <globalT> <outPng>
 const path=require('path');const puppeteer=require('puppeteer-core');
 const ROOT=path.resolve(__dirname,'..');
-const CHROME='C:/Program Files/Google/Chrome/Application/chrome.exe';
+const CHROME=process.env.CHROME_PATH || undefined;
 const t=parseFloat(process.argv[2]), out=process.argv[3];
 (async()=>{
   const b=await puppeteer.launch({executablePath:CHROME,headless:true,

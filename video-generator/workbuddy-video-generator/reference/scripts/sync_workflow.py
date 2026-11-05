@@ -12,12 +12,21 @@
   - 单文件超 100MB 会被 GitHub 拒收，脚本会先扫一遍暂存区做拦截
 
 用法：
-  python scripts/sync_workflow.py                      # 自动提交信息
+  python scripts/sync_workflow.py                      # 只同步白名单目录
   python scripts/sync_workflow.py -m "docs: 补充xx"     # 指定提交信息
   python scripts/sync_workflow.py --dry-run            # 只看会提交什么
+  python scripts/sync_workflow.py --all                # 显式确认全量 git add -A
+
+安全边界（2026-11-05 整改）：
+  - 默认不用 `git add -A`：只暂存白名单内的流程目录与根文档，避免把工作区里
+    误放的敏感文件一并提交推送。需要全量暂存时须显式加 --all。
+  - 无论哪种模式，暂存区出现疑似凭据文件（.env / *.key / *.pem / id_rsa /
+    *credential* / *secret* / *token*）都会中止，不提交、不推送。
+  - 本脚本是来源仓的参考实现，公开仓下载者请勿直接照搬定时任务配置。
 """
 import argparse
 import os
+import re
 import subprocess
 import sys
 import time
@@ -28,6 +37,14 @@ REPO = os.path.dirname(os.path.dirname(HERE))      # vibe-knowledge-video/
 GIT_NAME = os.environ.get("GIT_NAME", "WorkBuddy Workflow")
 GIT_EMAIL = os.environ.get("GIT_EMAIL", "workbuddy@users.noreply.github.com")
 MAX_FILE_MB = 95
+
+# 默认只同步流程产物；任何未列入的目录不会被暂存
+SAFE_PREFIXES = ("docs/", "references/", "scripts/", "films/", "reference/", "assets/")
+SAFE_FILES = ("SKILL.md", "README.md", "HANDOFF.md", ".gitignore",
+              "requirements.txt", ".env.example", "LICENSE", "THIRD_PARTY_NOTICES.md")
+SENSITIVE_RE = re.compile(
+    r"(^|/)\.env($|\.)|(^|/)id_rsa|(^|/)[^/]*(credential|secret|token|password)[^/]*\."
+    r"(json|txt|md|env|ya?ml|ini|conf)$|\.(pem|key|p12|pfx)$", re.I)
 
 
 def run(args, check=True, capture=True):
@@ -48,17 +65,40 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("-m", "--message", default="")
     ap.add_argument("--dry-run", action="store_true")
+    ap.add_argument("--all", action="store_true",
+                    help="显式确认全量 git add -A（会暂存工作区所有改动）")
     a = ap.parse_args()
 
     if not os.path.isdir(os.path.join(REPO, ".git")):
         print(f"✖ 不是 git 仓库：{REPO}")
         return 1
 
-    run(["git", "add", "-A"])
+    if a.all:
+        print("· --all：全量暂存（仍需通过敏感文件拦截）")
+        run(["git", "add", "-A"])
+    else:
+        paths = [p for p in SAFE_PREFIXES if os.path.isdir(os.path.join(REPO, p))]
+        paths += [p for p in SAFE_FILES if os.path.isfile(os.path.join(REPO, p))]
+        if not paths:
+            print("✖ 未找到任何白名单目录或文件，拒绝空转")
+            return 1
+        run(["git", "add", "--", *paths])
+        print(f"· 白名单暂存 {len(paths)} 项：{' '.join(paths[:6])}"
+              + (" …" if len(paths) > 6 else ""))
+
     files = staged_files()
     if not files:
         print("· 工作区干净，无需同步")
         return 0
+
+    # 敏感文件拦截：无论白名单还是 --all 都生效
+    sensitive = [f for f in files if SENSITIVE_RE.search(f)]
+    if sensitive:
+        print("✖ 暂存区含疑似凭据/敏感文件，已中止（未提交、未推送）：")
+        for f in sensitive:
+            print(f"   {f}")
+        print("  请从工作区移出并加入 .gitignore 后重跑；不要使用 --all 绕过。")
+        return 4
 
     # 大文件拦截（GitHub 单文件上限 100MB，超了整次推送都会失败）
     big = []

@@ -21,7 +21,7 @@ function struct_ct(d) {
   for (const [name, args] of Object.entries(CASES)) {
     try {
       const b = await puppeteer.launch({
-        executablePath: 'C:/Program Files/Google/Chrome/Application/chrome.exe',
+        executablePath: process.env.CHROME_PATH || undefined,
         headless: true, args
       });
       const p = await b.newPage();

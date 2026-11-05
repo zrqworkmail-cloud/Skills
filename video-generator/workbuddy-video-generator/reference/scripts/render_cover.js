@@ -3,7 +3,7 @@
 const path = require('path');
 const puppeteer = require('puppeteer-core');
 
-const CHROME = 'C:/Program Files/Google/Chrome/Application/chrome.exe';
+const CHROME = process.env.CHROME_PATH || undefined;
 const [html, out, w, h, bg] = process.argv.slice(2);
 const W = Number(w), H = Number(h);
 

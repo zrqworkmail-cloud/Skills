@@ -19,7 +19,7 @@ const FF = process.env.FFMPEG_PATH || 'ffmpeg';
 
   // 2. 渲染透明图形层
   const b = await puppeteer.launch({
-    executablePath: 'C:/Program Files/Google/Chrome/Application/chrome.exe',
+    executablePath: process.env.CHROME_PATH || undefined,
     headless: true,
     args: ['--allow-file-access-from-files', '--force-color-profile=srgb',
       '--font-render-hinting=none', '--disable-lcd-text', '--disable-gpu', '--no-sandbox']

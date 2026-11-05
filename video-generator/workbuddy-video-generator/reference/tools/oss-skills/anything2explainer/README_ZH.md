@@ -3,9 +3,11 @@
 [![Claude Code](https://img.shields.io/badge/Claude%20Code-skill-D97757?logo=anthropic&logoColor=white)](https://claude.com/claude-code)
 [![Codex](https://img.shields.io/badge/Codex-skill-000000)](https://openai.com/codex)
 [![Remotion](https://img.shields.io/badge/Remotion-4.0-0B84F3)](https://remotion.dev)
-[![License](https://img.shields.io/badge/license-PolyForm%20Noncommercial-informational)](LICENSE)
+[![License](https://img.shields.io/badge/license-PolyForm%20Noncommercial-informational)](https://github.com/Vincentwei1021/anything2explainer/blob/HEAD/LICENSE)
 
-[English](README.md) | **简体中文**
+[English](https://github.com/Vincentwei1021/anything2explainer/blob/HEAD/README.md) | **简体中文**
+
+> **快照说明**：本目录是上游项目的部分快照，下列文件未随本仓同步。链接已指向上游仓库；许可状态见仓库根 `THIRD_PARTY_NOTICES.md`。
 
 **给一个主题，产出一条带配音的科普讲解视频。** anything2explainer 是一个 [Claude Code](https://claude.com/claude-code) / [Codex](https://openai.com/codex) skill：输入任意主题，输出一条黑底 MG（motion graphics）风格的讲解视频，带 TTS 配音、字幕和章节进度条，中文或英文都行。画面全部由 [Remotion](https://remotion.dev)（React + TypeScript）代码绘制，不用素材库，不用视频生成模型，也不使用任何现有视频的帧。
 
@@ -19,7 +21,7 @@ https://github.com/user-attachments/assets/5c213990-cbba-439e-8371-fbb3aa348e05
 
 https://github.com/user-attachments/assets/e2771c68-a28c-4459-ac5a-a5b685181eeb
 
-两版共用一套分镜和 44 个镜头，英文版按英文配音逐镜头重排帧号。中文原版（4′35″，星点幕底，8 个构建 agent 并行 40 分钟 + 两轮 QC）的全套过程文件在 [`examples/rag/`](examples/rag/)（调研 → 解说词 → 分镜表 → 镜头源码 → QC 报告 → 交付说明），成片帧在 [`examples/rag/frames/`](examples/rag/frames/)。
+两版共用一套分镜和 44 个镜头，英文版按英文配音逐镜头重排帧号。中文原版（4′35″，星点幕底，8 个构建 agent 并行 40 分钟 + 两轮 QC）的全套过程文件在 [`examples/rag/`](https://github.com/Vincentwei1021/anything2explainer/tree/HEAD/examples/rag)（调研 → 解说词 → 分镜表 → 镜头源码 → QC 报告 → 交付说明），成片帧在 [`examples/rag/frames/`](https://github.com/Vincentwei1021/anything2explainer/tree/HEAD/examples/rag/frames)。
 
 ## 它做什么
 
@@ -210,8 +212,8 @@ examples/contrast/        6 组正例/反例帧对照（构图与光的标尺）
 
 ## 许可
 
-工具包本身：[PolyForm Noncommercial 1.0.0](LICENSE)——非商业使用免费，商业使用需事先获得作者授权。**用它做出来的视频归你自己**。
-模板内四款字体（Noto Sans SC / Orbitron / Exo 2 / Audiowide）按 SIL OFL 1.1 单独授权，版权与许可全文见 [`template/public/fonts/LICENSE.md`](template/public/fonts/LICENSE.md)。
+工具包本身：[PolyForm Noncommercial 1.0.0](https://github.com/Vincentwei1021/anything2explainer/blob/HEAD/LICENSE)——非商业使用免费，商业使用需事先获得作者授权。**用它做出来的视频归你自己**。
+模板内四款字体（Noto Sans SC / Orbitron / Exo 2 / Audiowide）按 SIL OFL 1.1 单独授权，版权与许可全文见 [`template/public/fonts/LICENSE.md`](https://github.com/Vincentwei1021/anything2explainer/blob/HEAD/template/public/fonts/LICENSE.md)。
 Remotion 自身对公司用户另有授权要求，见 [remotion.dev/license](https://remotion.dev/license)。
 
 ## 已知限制

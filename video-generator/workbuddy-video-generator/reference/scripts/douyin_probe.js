@@ -1,7 +1,7 @@
 // 诊断：打开上传页，截图 + 导出页面结构，看登录态和上传控件长什么样
 const path = require('path');
 const puppeteer = require('puppeteer-core');
-const CHROME = process.env.CHROME_PATH || 'C:/Program Files/Google/Chrome/Application/chrome.exe';
+const CHROME = process.env.CHROME_PATH || undefined;
 const os = require('os');
 const PROFILE = path.join(os.tmpdir(), 'douyin-upload-profile');
 const OUT = process.argv[2];

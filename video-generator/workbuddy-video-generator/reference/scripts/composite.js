@@ -6,7 +6,7 @@ const puppeteer = require('puppeteer-core');
 
 const { FILM, SRC, OUT } = require('./_film');
 const FFMPEG = process.env.FFMPEG_PATH || 'ffmpeg';
-const CHROME = 'C:/Program Files/Google/Chrome/Application/chrome.exe';
+const CHROME = process.env.CHROME_PATH || undefined;
 
 const FPS = Number(process.argv[2] || 30);
 const DUR = process.argv[3] ? Number(process.argv[3]) : null;

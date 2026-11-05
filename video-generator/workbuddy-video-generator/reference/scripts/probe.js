@@ -5,7 +5,7 @@ const ROOT = path.resolve(__dirname, '..');
 
 (async () => {
   const browser = await puppeteer.launch({
-    executablePath: 'C:/Program Files/Google/Chrome/Application/chrome.exe', headless: true,
+    executablePath: process.env.CHROME_PATH || undefined, headless: true,
     args: ['--allow-file-access-from-files', '--force-color-profile=srgb', '--font-render-hinting=none', '--disable-lcd-text', '--no-sandbox']
   });
   const page = await browser.newPage();

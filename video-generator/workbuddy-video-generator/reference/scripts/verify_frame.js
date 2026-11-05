@@ -8,7 +8,7 @@ const puppeteer = require('puppeteer-core');
 const ROOT = path.resolve(__dirname, '..');
 const OUT = path.join(ROOT, 'out');
 const FFMPEG = process.env.FFMPEG_PATH || 'ffmpeg';
-const CHROME = 'C:/Program Files/Google/Chrome/Application/chrome.exe';
+const CHROME = process.env.CHROME_PATH || undefined;
 
 const tl = JSON.parse(fs.readFileSync(path.join(ROOT, 'src', 'timeline.json'), 'utf-8'));
 const BEAT = tl.beatSec || 60 / tl.bpm;

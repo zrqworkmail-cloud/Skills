@@ -1,0 +1,22 @@
+# workbuddy-video-generator · Python 依赖
+# 安装：python -m pip install -r requirements.txt
+# 外部二进制（ffmpeg/ffprobe/Node/Chrome）不通过 pip 安装，见 docs/从零复现.md
+
+# --- 核心：测量、构图、合成 ---
+numpy>=1.24
+Pillow>=10
+
+# --- 可选：音频分析 / 混音 ---
+# soundfile>=0.12
+# scipy>=1.11
+# librosa>=0.10
+
+# --- 可选：AI 生成路线（需本机 ComfyUI + Wan2.2 权重）---
+# requests>=2.31        # wan_i2v.py / ComfyUI API 提交
+# imageio-ffmpeg        # 无系统 ffmpeg 时提供二进制
+
+# --- 可选：本地 TTS ---
+# kokoro-onnx           # tts_kokoro.py；另需 kokoro-v1.0.onnx + voices-v1.0.bin
+
+# --- 可选：无版权 BGM 兜底生成器（仅兜底，不用于成片）---
+# 无额外依赖

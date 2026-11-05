@@ -6,7 +6,7 @@ const puppeteer = require('puppeteer-core');
 const ROOT = path.resolve(__dirname, '..');
 const SRC = path.join(ROOT, 'src');
 const OUT = path.join(ROOT, 'out', 'stills');
-const CHROME = 'C:/Program Files/Google/Chrome/Application/chrome.exe';
+const CHROME = process.env.CHROME_PATH || undefined;
 
 const PAGE = process.argv[2] || 'index.html';
 const TIMES = (process.argv[3] || '2,8,15,26,40,52,62,75,86,97').split(',').map(Number);

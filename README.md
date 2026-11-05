@@ -59,3 +59,30 @@ cp -r video-generator/qoder-video-generator "$AGENT_USER_SKILLS_DIR/qoder-video-
 - **踩坑写根因**：不写"注意 XX"，写"症状 → 根因 → 修法"。
 - **公开前脱敏**：移除本机绝对路径、私有项目规格、凭据与后台数据；来源仓的历史证据要标注"本包不含"。
 - **平台差异写进包内**：同一功能的不同平台版本各自维护流程真源，不互相覆盖门禁与判据。
+
+
+## 许可与第三方组件
+
+- [LICENSE](LICENSE) 是审计整改补入的**保守默认声明（待所有者确认最终许可证）**：原创内容保留所有权利，允许个人学习与非商业使用；**本仓整体不得用于商业目的**。
+- `reference/tools/oss-skills/` 下的第三方组件**不受根 LICENSE 覆盖**，按各自许可执行；其中含明确禁止商用的 PolyForm Noncommercial 组件。完整清单与商用前须核实的项见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。
+- 若所有者要换成标准开源许可证，须先排除含非商用组件的目录，不能简单用 MIT / Apache-2.0 覆盖全仓。
+
+## 从零复现（换一台机器）
+
+**clone 本仓不能直接开始生产视频。** 运行时（Python / Node / ffmpeg / Chrome）、中文字体、ComfyUI 工作流与模型权重、外部平台技能与凭据均不随仓分发。完整前置条件、分路线可达性与验证命令见 [docs/从零复现.md](docs/从零复现.md)。
+
+各包 `requirements.txt` 与 `.env.example` 列出了 Python 依赖与可覆盖的环境变量；`scripts/env_report.sh` 是只读能力探针。外部二进制一律走环境变量或 PATH 探测，不写死本机路径。
+
+> `reference/scripts/sync_workflow.py` 是来源仓的自动同步参考实现，**不要照搬其定时任务配置**；本仓版本默认只暂存白名单目录，并拦截疑似凭据文件，任何自动推送前先跑 `--dry-run`。
+
+## 目录名与技能名对照
+
+`SKILL.md` 的 `name` 是 agent 运行时加载的技能标识，与本仓的发布目录名可以不同；**安装时以 `name` 作为技能目录名**，不要按下面的发布目录名重命名，否则 `SKILL.md` 内引用的运行时路径会失效。
+
+| 发布目录（本仓） | `SKILL.md` 的 `name` | 运行时技能目录 |
+|---|---|---|
+| `video-generator/workbuddy-video-generator/` | `workbuddy-video-workflow` | `<用户级技能目录>/workbuddy-video-workflow/` |
+| `video-generator/qoder-video-generator/` | `qoder-video-generator` | `<用户级技能目录>/qoder-video-generator/` |
+| `slide-generator/workbuddy-slide-generator/` | `slide-generator` | `<用户级技能目录>/slide-generator/` |
+
+前两行的差异是历史沿革：`workbuddy-video-workflow` 是本机实际加载的技能名，`HANDOFF.md`、`README.md` 与多份分镜文档都按它引用；为保持加载链一致，发布目录改名后 `name` 保持不变，这里以对照表消除歧义。

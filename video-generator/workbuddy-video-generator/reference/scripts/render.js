@@ -8,7 +8,7 @@ const ROOT = path.resolve(__dirname, '..');
 const SRC = path.join(ROOT, 'src');
 const OUT = path.join(ROOT, 'out');
 const FFMPEG = process.env.FFMPEG_PATH || 'ffmpeg';
-const CHROME = 'C:/Program Files/Google/Chrome/Application/chrome.exe';
+const CHROME = process.env.CHROME_PATH || undefined;
 
 const PAGE = process.argv[2] || 'index.html';
 const FPS = Number(process.argv[3] || 30);

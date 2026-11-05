@@ -1,0 +1,8 @@
+# workbuddy-slide-generator · Python 依赖
+# 安装：python -m pip install -r requirements.txt
+
+# 原生可编辑 PPTX 路线（可选，若平台已提供 pptx 技能可不装）
+python-pptx>=0.6.21
+
+# 说明：整页 PNG 路线依赖当前环境可用的 GPT Image 能力，不是 pip 包。
+# 模板字体与用户材料由使用者自备，不随仓分发。
