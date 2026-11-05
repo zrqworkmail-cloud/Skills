@@ -1,6 +1,6 @@
 # video-generator · 视频制作
 
-视频制作领域的技能包，按 agent 平台分子目录存放。每个子目录内部自洽（自带流程、参考实现、复盘），互不依赖。
+视频制作领域的技能包，按 agent 平台分子目录存放。每个子目录内部自洽（自带流程、参考实现、复盘），互不依赖。**跨平台共用的素材放在本目录的 `assets/` 下，不归属任何平台包。**
 
 ## 收录
 
@@ -23,17 +23,38 @@
 ├── README.md         ← 安装、来源、与另一平台的差异、已知边界
 ├── references/       ← 按需加载的流程手册与踩坑记录
 ├── scripts/          ← 探针、渲染、测量、混音等脚本
-├── assets/           ← 模板、音源等输出用资源
+├── assets/           ← 平台包专有资源（如 workbuddy 包的 sfx/）
 └── docs/ films/ reference/   ← 可选：方法论、成片复盘、参考实现代码
 ```
 
 技能本体在**平台包根**，不再套一层 `skills/`；拷贝安装时整目录复制即可。
+
+### 功能层共享素材
+
+```
+video-generator/
+├── assets/audio/                     ← 跨平台共用：VibeKnowledgeBGM_20min.m4a + README.md
+├── workbuddy-video-generator/        ← 平台包（自有 assets/audio/sfx/ 不共享）
+└── qoder-video-generator/            ← 平台包
+```
+
+`assets/audio/VibeKnowledgeBGM_20min.m4a` 是账号听感资产，
+**既不在 qoder 包内也不在 workbuddy 包内**。`workbuddy-video-generator` 默认
+引用它；`qoder-video-generator` 按「用户自备配乐、不代找不替换」的口径默认不
+引用，需要时可复用。授权状态见 [assets/audio/README.md](assets/audio/README.md)
+与根 [THIRD_PARTY_NOTICES.md](../THIRD_PARTY_NOTICES.md)。
+
+引用方式：脚本按 `VIBE_BGM` / `VIBE_BGM_SRC` 环境变量 → 技能包内 `assets/audio/`
+→ 功能层 `../assets/audio/` 三级解析。这样本地源仓（仓库根即技能包）与公开仓
+（功能/平台两级）两种布局都能跑；单独拷贝一个平台包时请一并带上共享目录，
+或用环境变量指向自备音轨。
 
 ## 约定
 
 - 平台包内不写本机绝对路径；外部二进制走环境变量或运行时探测。
 - 成片、素材、构建产物、压缩包不入库。
 - 两套包的流程真源各自独立维护；一方升级不自动改写另一方。
+- 共享素材放功能层，不算「跨包依赖」；平台包对它的引用必须允许缺失并给出明确报错，不能在缺素材时静默降级。
 
 
 ## 换机复现与许可

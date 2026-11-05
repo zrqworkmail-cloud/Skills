@@ -2,7 +2,7 @@
 
 用于存放 AI agent 学习过程中想用的、用过的、好用的各种领域 skill，便于一键搭建机器工作流。
 
-**目录分两级：先按功能划分，再按 agent 平台划分。** 每个 `<平台>-<功能>-generator/` 是一个自洽的技能包（自带流程文档、参考实现、踩坑记录），互不依赖。
+**目录分两级：先按功能划分，再按 agent 平台划分。** 每个 `<平台>-<功能>-generator/` 是一个自洽的技能包（自带流程文档、参考实现、踩坑记录），互不依赖。**跨平台共用的素材放功能层 `assets/`，不归属任何单个平台包。**
 
 ## 收录
 
@@ -22,6 +22,7 @@
 Skills/
 ├── <功能>-generator/                    ← 一级：功能（video / slide / ...）
 │   ├── README.md                        ← 领域索引
+│   ├── assets/                          ← 功能层共享素材（跨平台公用，如 BGM 母版）
 │   └── <平台>-<功能>-generator/         ← 二级：agent 平台，技能本体在根
 │       ├── SKILL.md                     ← 技能本体
 │       ├── README.md                    ← 安装、来源、边界
@@ -36,7 +37,7 @@ Skills/
 
 - 功能目录根**不放** `SKILL.md`；技能本体一律在平台子目录根。
 - 新增平台时，在同一功能目录下并列新增子目录，不改动已有平台包。
-- 各平台包内部自洽，可独立拷贝安装；跨包不共享相对路径。
+- 各平台包内部自洽，可独立拷贝安装；**跨包共用素材放功能层 `assets/`**，由各包通过环境变量或相对回退引用，不写死绝对路径。
 
 ## 命名约定
 
@@ -46,10 +47,11 @@ Skills/
 
 ## 用法
 
-各平台子目录的 `README.md` 写了具体怎么用。通常只需把 `SKILL.md`、`references/`、`scripts/`、`assets/` 一起拷到对应 agent 的用户级技能目录，目录名保持与技能包同名：
+各平台子目录的 `README.md` 写了具体怎么用。通常只需把 `SKILL.md`、`references/`、`scripts/`、`assets/` 一起拷到对应 agent 的用户级技能目录，目录名保持与技能包同名；若该领域有功能层共享素材（如 `video-generator/assets/audio/`），需一并拷贝或用环境变量指向自备文件：
 
 ```bash
 cp -r video-generator/qoder-video-generator "$AGENT_USER_SKILLS_DIR/qoder-video-generator"
+# 如需 BGM 母版：cp -r video-generator/assets/audio "$PROJECT_ROOT/" # 或设置 VIBE_BGM
 ```
 
 ## 约定

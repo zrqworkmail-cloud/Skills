@@ -14,7 +14,24 @@ import numpy as np
 
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 SFX_DIR = os.path.join(ROOT, "assets", "audio", "sfx")
-BGM = os.path.join(ROOT, "assets", "audio", "VibeKnowledgeBGM_20min.m4a")
+def resolve_bgm():
+    """环境变量 → 包内 → 功能层共享；都不存在则明确报错。"""
+    name = "VibeKnowledgeBGM_20min.m4a"
+    candidates = [
+        os.environ.get("VIBE_BGM") or os.environ.get("VIBE_BGM_SRC"),
+        os.path.join(ROOT, "assets", "audio", name),
+        os.path.join(ROOT, "..", "assets", "audio", name),
+    ]
+    for p in candidates:
+        if p and os.path.isfile(p):
+            return p
+    raise FileNotFoundError(
+        "找不到 BGM 母版。请设置 VIBE_BGM 指向自备音轨，或把母版放到 "
+        "assets/audio/（本地源仓）或 video-generator/assets/audio/（公开仓）。"
+    )
+
+
+BGM = resolve_bgm()
 REMOTION_OUT = os.path.join(ROOT, "reference", "remotion", "out")
 OUT_DIR = os.path.join(ROOT, "films", "llama4-moe", "out", "av")
 SR = 48000

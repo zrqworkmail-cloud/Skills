@@ -19,7 +19,7 @@
 
 | 文件 | 状态 |
 |---|---|
-| `video-generator/workbuddy-video-generator/assets/audio/VibeKnowledgeBGM_20min.m4a`（38.1 MB） | 由仓库维护者自备并随仓提供，用于流程复现。**本仓未声明其来源、作者或授权范围**，不授予任何超出原始权利人的音乐使用权。使用者须自行向权利人确认；商用前尤其需要核实。详见该目录 `README.md` |
+| `video-generator/assets/audio/VibeKnowledgeBGM_20min.m4a`（38.1 MB，功能层共享） | 由仓库维护者自备并随仓提供，用于流程复现。**本仓未声明其来源、作者或授权范围**，不授予任何超出原始权利人的音乐使用权。使用者须自行向权利人确认；商用前尤其需要核实。详见该目录 `README.md` |
 
 ## 3. 未随仓分发、需使用者自备
 

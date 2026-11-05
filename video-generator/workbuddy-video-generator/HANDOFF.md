@@ -103,7 +103,7 @@
 | Chromium | 用环境变量 `CHROME_EXECUTABLE_PATH` 指向本机 Playwright 的 chromium（**不写死绝对路径**，换机器就失效） |
 | Python | 本机 WorkBuddy 托管的 Python 3.13（numpy / imageio-ffmpeg 可用），用 `sys.executable` 取，不用写死路径 |
 | ffmpeg | 用 `imageio_ffmpeg.get_ffmpeg_exe()`，系统无 ffmpeg |
-| BGM | `assets/audio/VibeKnowledgeBGM_20min.m4a`（20:00，44.1kHz） |
+| BGM | **功能层共享** `video-generator/assets/audio/VibeKnowledgeBGM_20min.m4a`（20:00，44.1kHz）；本地源仓布局为 `assets/audio/`，脚本按三级解析自动适配 |
 | 音效 | `assets/audio/sfx/*.wav`（8 个，纯 numpy 合成，无版权问题） |
 
 ### 5.2 渲染一镜

@@ -2,8 +2,9 @@
 # -*- coding: utf-8 -*-
 """用【用户原始音乐】构建 BGM（bgm_final.m4a）。
 
-源：用户指定的原始音乐文件（路径经环境变量 `VIBE_BGM_SRC` 传入，默认取仓库内
-    `assets/audio/` 下的同名母版），时长 2:30。
+源：用户指定的原始音乐文件（路径经环境变量 `VIBE_BGM` / `VIBE_BGM_SRC` 传入，
+    否则依次回退到技能包内 `assets/audio/` 与功能层共享
+    `video-generator/assets/audio/` 下的同名母版），时长 2:30。
 做法：
   1) 取音质最好的音轨解码为 bgm_source.wav；
   2) 谱通量 onset 检测 + 暴力搜索起点 M0，使 9 个镜头的剪辑点尽量落在鼓点上
@@ -13,7 +14,7 @@
   4) 轻量归一化到约 -16 LUFS + 头尾淡入淡出，写 bgm_final.m4a。
 
 用法：python scripts/make_bgm.py
-      环境变量：VIBE_BGM_SRC（源音乐路径）、VIBE_FFMPEG（ffmpeg 可执行文件路径）
+      环境变量：VIBE_BGM / VIBE_BGM_SRC（源音乐路径）、VIBE_FFMPEG（ffmpeg 路径）
 """
 import json
 import os
@@ -24,9 +25,24 @@ import numpy as np
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 FF = os.environ.get("VIBE_FFMPEG") or "ffmpeg"
-SRC_MUSIC = os.environ.get("VIBE_BGM_SRC") or os.path.join(
-    ROOT, "assets", "audio", "VibeKnowledgeBGM_20min.m4a"
-)
+def resolve_bgm():
+    """环境变量 → 包内 → 功能层共享；都不存在则明确报错。"""
+    name = "VibeKnowledgeBGM_20min.m4a"
+    candidates = [
+        os.environ.get("VIBE_BGM") or os.environ.get("VIBE_BGM_SRC"),
+        os.path.join(ROOT, "assets", "audio", name),
+        os.path.join(ROOT, "..", "assets", "audio", name),
+    ]
+    for p in candidates:
+        if p and os.path.isfile(p):
+            return p
+    raise FileNotFoundError(
+        "找不到 BGM 母版。请设置 VIBE_BGM 指向自备音轨，或把母版放到 "
+        "assets/audio/（本地源仓）或 video-generator/assets/audio/（公开仓）。"
+    )
+
+
+SRC_MUSIC = resolve_bgm()
 OUTDIR = os.path.join(ROOT, "out", "audio")
 SRC_WAV = os.path.join(OUTDIR, "bgm_source.wav")
 OUT_M4A = os.path.join(OUTDIR, "bgm_final.m4a")

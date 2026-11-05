@@ -247,17 +247,19 @@ agent_created: true
 
 ### 4.3 音频
 
-**BGM 是账号资产，不要每片现造。** 本技能自带 **20 分钟母版**：`assets/audio/VibeKnowledgeBGM_20min.m4a`（44.1kHz 立体声 AAC）。知识类成片（30s~4min）都远短于母版，标准做法是**按目标时长截取**：
+**BGM 是账号资产，不要每片现造。** 功能层共享 **20 分钟母版**：`video-generator/assets/audio/VibeKnowledgeBGM_20min.m4a`（44.1kHz 立体声 AAC）。它属于功能层、不属于任何平台包，两个视频技能包共用；授权状态见同目录 `README.md`。知识类成片（30s~4min）都远短于母版，标准做法是**按目标时长截取**：
 
 ```bash
+# 母版位置：环境变量 > 技能包内 assets/audio/ > 功能层 ../assets/audio/
+BGM="${VIBE_BGM:-../assets/audio/VibeKnowledgeBGM_20min.m4a}"
 # 截取前 N 秒，末尾 1.2s 淡出，预留 -1dB 编码余量
-ffmpeg -i assets/audio/VibeKnowledgeBGM_20min.m4a -t <成片时长> \
+ffmpeg -i "$BGM" -t <成片时长> \
   -af "volume=-1dB,afade=t=out:st=<成片时长-1.2>:d=1.2" -c:a aac out.m4a
 ```
 
 混流铁律不变：用 `-t <成片时长>` 精确截断，**禁 `-shortest`**。
 
-⚠️ **母版必须入库、跟着仓库走**（放 `assets/`，不要放 `out/`）。落在产物目录会被忽略规则挡在库外，换台机器开工就没有 BGM，只能临时合成——账号的听感资产就断了一次。
+⚠️ **母版必须入库、跟着仓库走**（放 `assets/`，不要放 `out/`）。落在产物目录会被忽略规则挡在库外，换台机器开工就没有 BGM，只能临时合成——账号的听感资产就断了一次。单独拷贝本平台包安装时，记得一并带上功能层 `video-generator/assets/audio/`，或用 `VIBE_BGM` 指向自备音轨；找不到母版时脚本会明确报错，不会静默合成顶替。
 
 **只有换用比成片短的母版时**，才需要接续技术，三种做法按优先级：
 
