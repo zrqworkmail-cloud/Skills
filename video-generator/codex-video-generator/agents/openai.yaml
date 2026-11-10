@@ -1,0 +1,4 @@
+interface:
+  display_name: "学术动态视频与逐页可控PPT"
+  short_description: "复用参考动效制作学术视频，并按完整分镜嵌入可控PPT"
+  default_prompt: "使用 $academic-motion-video-ppt 制作或修订学术动态图形视频和逐页可控的视频PPT。"

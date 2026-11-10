@@ -11,6 +11,7 @@
 | [slide-generator/workbuddy-slide-generator/](./slide-generator/workbuddy-slide-generator/) | 科研演示 | WorkBuddy | 模板继承、样页审核、可编辑 PPTX 与图片式演示 |
 | [video-generator/workbuddy-video-generator/](./video-generator/workbuddy-video-generator/) | 视频制作 | WorkBuddy | 从选题到成片提交的八阶段流程：选题 → 脚本 → 分镜 → 素材 → 剪辑合成 → 质检 → 交付 → 发布复盘。含技能本体、方法论、参考实现代码、各支片复盘 |
 | [video-generator/qoder-video-generator/](./video-generator/qoder-video-generator/) | 视频制作 | Qoder / Codex | 本地知识短片产线 v9.2：S0–S11、视觉实验／连续演示、brief/frame/shotlist 输入契约、样片闸门与交付 MP4 逐项复验。含流程手册、模板与工具脚本 |
+| [video-generator/codex-video-generator/](./video-generator/codex-video-generator/) | 学术动态视频与视频 PPT | Codex | Remotion 参考动效复用、KaTeX、完整分镜、无配音技术叙事及逐页可控视频 PPT |
 
 各功能目录下的 `README.md` 是该领域的入口索引。
 
@@ -86,5 +87,6 @@ cp -r video-generator/qoder-video-generator "$AGENT_USER_SKILLS_DIR/qoder-video-
 | `video-generator/workbuddy-video-generator/` | `workbuddy-video-workflow` | `<用户级技能目录>/workbuddy-video-workflow/` |
 | `video-generator/qoder-video-generator/` | `qoder-video-generator` | `<用户级技能目录>/qoder-video-generator/` |
 | `slide-generator/workbuddy-slide-generator/` | `slide-generator` | `<用户级技能目录>/slide-generator/` |
+| `video-generator/codex-video-generator/` | `academic-motion-video-ppt` | `<用户级技能目录>/academic-motion-video-ppt/` |
 
 前两行的差异是历史沿革：`workbuddy-video-workflow` 是本机实际加载的技能名，`HANDOFF.md`、`README.md` 与多份分镜文档都按它引用；为保持加载链一致，发布目录改名后 `name` 保持不变，这里以对照表消除歧义。

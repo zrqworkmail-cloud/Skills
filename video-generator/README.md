@@ -8,12 +8,14 @@
 |---|---|---|
 | [workbuddy-video-generator/](./workbuddy-video-generator/) | WorkBuddy | 与项目、工具、素材来源无关的八阶段主干：选题 → 脚本 → 分镜 → 素材 → 剪辑合成 → 质检 → 交付 → 发布复盘。含技能本体、方法论、Remotion 参考实现与各支片复盘 |
 | [qoder-video-generator/](./qoder-video-generator/) | Qoder / Codex | 本地知识短片产线 v9.2：S0–S11、视觉实验／连续演示、brief/frame/shotlist 输入契约、关键机制样片确认、交付 MP4 逐项复验。含流程手册、模板与 35 个工具脚本 |
+| [codex-video-generator/](./codex-video-generator/) | Codex | 学术动态技术视频与逐页可控视频 PPT；参考动效复用、数学排版、完整分镜与归档校验 |
 
 ## 选哪一套
 
 - 需要一个**与工具链无关的通用流程**（换题材、换引擎都能套）→ `workbuddy-video-generator`。
 - 需要一套**绑定本地 Remotion / ComfyUI 产线**的可执行流程，且接受其输入契约与闸门 → `qoder-video-generator`。
-- **同一任务只选一套，不叠加两套门禁。** 两套流程的阶段划分、样稿定义与验收口径不同，混用会产生互相矛盾的判据。
+- 需要**学术计算机制动画与按完整分镜控制的 PowerPoint** → `codex-video-generator`，运行时技能名为 `academic-motion-video-ppt`。
+- **同一任务只选一套，不叠加多套门禁。** 各套流程的阶段划分、样稿定义与验收口径不同，混用会产生互相矛盾的判据。
 
 ## 子目录结构约定
 
@@ -54,12 +56,12 @@ video-generator/
 
 - 平台包内不写本机绝对路径；外部二进制走环境变量或运行时探测。
 - 成片、素材、构建产物、压缩包不入库。
-- 两套包的流程真源各自独立维护；一方升级不自动改写另一方。
+- 各包的流程真源各自独立维护；一方升级不自动改写另一方。
 - 共享素材放功能层，不算「跨包依赖」；平台包对它的引用必须允许缺失并给出明确报错，不能在缺素材时静默降级。
 
 
 ## 换机复现与许可
 
-两个包都是规范 + 参考实现，不是开箱即用的安装器。前置条件见仓库根
+各包都是规范 + 参考实现，不是开箱即用的安装器。前置条件见仓库根
 [docs/从零复现.md](../docs/从零复现.md)；第三方组件与音频授权状态见
 [THIRD_PARTY_NOTICES.md](../THIRD_PARTY_NOTICES.md)。
