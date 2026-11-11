@@ -42,4 +42,6 @@ jobs:
           node scripts/check-tokens.mjs examples
 
       - name: 时间轴校验
-        run: node scripts/check-timeline.mjs assets/templates/timeline.example.json
+        run: |
+          node scripts/check-timeline.mjs assets/templates/timeline.example.json
+          node scripts/check-timeline.mjs examples/minimal/src/spot/timeline.json
