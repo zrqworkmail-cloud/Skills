@@ -1,0 +1,29 @@
+{
+  "id": "pull-back-context",
+  "name": "拉远交代",
+  "intent": "拉远，把主体放回环境里，交代尺度与位置",
+  "note": "拉远后画面边缘必须有内容，否则越拉越空",
+  "category": "camera",
+  "shotSize": "wide",
+  "durationRange": [
+    42,
+    78
+  ],
+  "camera": {
+    "zoom": [
+      1.14,
+      1
+    ],
+    "easing": "outCubic"
+  },
+  "exit": {
+    "type": "cut"
+  },
+  "audio": {
+    "sfx": []
+  },
+  "tags": [
+    "context",
+    "calm"
+  ]
+}

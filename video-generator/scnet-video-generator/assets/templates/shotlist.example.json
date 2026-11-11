@@ -39,7 +39,7 @@
       "composition": "中心构图，主体占 1/2，底部留字幕区",
       "lighting": "顶光收束 + 暗角",
       "audio": {"vo": "VO-03", "sfx": ["click-01"]},
-      "recipe": "settle-close",
+      "recipe": "end-card-lockup",
       "description": "特写落版，结论与行动号召，最后一帧可作封面",
       "props": {"headline": "结论与行动"}
     }

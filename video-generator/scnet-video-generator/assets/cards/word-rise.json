@@ -1,0 +1,26 @@
+{
+  "id": "word-rise",
+  "name": "逐字上浮",
+  "intent": "一句需要被读完的话，逐字浮起",
+  "note": "每字错峰 2–3 帧，错峰太大读不成句，太小糊成一片",
+  "category": "typography",
+  "shotSize": "medium",
+  "durationRange": [
+    24,
+    48
+  ],
+  "entry": {
+    "type": "spring",
+    "damping": 18
+  },
+  "exit": {
+    "type": "cut"
+  },
+  "audio": {
+    "sfx": []
+  },
+  "tags": [
+    "text",
+    "calm"
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "id": "number-ticker-in",
+  "name": "数字跳入",
+  "intent": "关键数字从零滚到目标值，先给结论再解释",
+  "note": "位数要固定，否则滚动时宽度跳动，读起来像故障",
+  "category": "opening",
+  "shotSize": "close",
+  "durationRange": [
+    24,
+    42
+  ],
+  "entry": {
+    "type": "spring",
+    "damping": 20
+  },
+  "exit": {
+    "type": "cut"
+  },
+  "audio": {
+    "sfx": [
+      "tick-01"
+    ]
+  },
+  "tags": [
+    "data",
+    "hook"
+  ]
+}

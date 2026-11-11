@@ -1,0 +1,24 @@
+{
+  "id": "click-ripple",
+  "name": "点击涟漪",
+  "intent": "在操作落点扩散涟漪，告诉观众点了哪里",
+  "note": "涟漪中心必须是真实点击坐标，摆错位置比不做更糟",
+  "category": "interaction",
+  "shotSize": "close",
+  "durationRange": [
+    18,
+    30
+  ],
+  "exit": {
+    "type": "cut"
+  },
+  "audio": {
+    "sfx": [
+      "click-01"
+    ]
+  },
+  "tags": [
+    "ui",
+    "focus"
+  ]
+}

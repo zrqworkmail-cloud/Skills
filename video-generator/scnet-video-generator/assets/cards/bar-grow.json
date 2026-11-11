@@ -1,0 +1,26 @@
+{
+  "id": "bar-grow",
+  "name": "条形增长",
+  "intent": "条形从基线长到目标值，用来比较大小",
+  "note": "所有条共用一条缓动与同一结束帧，各长各的会读成混乱",
+  "category": "data",
+  "shotSize": "medium",
+  "durationRange": [
+    30,
+    60
+  ],
+  "entry": {
+    "type": "ease",
+    "durationInFrames": 20
+  },
+  "exit": {
+    "type": "cut"
+  },
+  "audio": {
+    "sfx": []
+  },
+  "tags": [
+    "data",
+    "compare"
+  ]
+}

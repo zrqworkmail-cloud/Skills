@@ -1,0 +1,26 @@
+{
+  "id": "tracking-expand",
+  "name": "字距展开",
+  "intent": "把六字以内的短标题撑满画面，制造呼吸",
+  "note": "只用于短句；长句展开后会散架",
+  "category": "typography",
+  "shotSize": "close",
+  "durationRange": [
+    20,
+    36
+  ],
+  "entry": {
+    "type": "ease",
+    "durationInFrames": 18
+  },
+  "exit": {
+    "type": "cut"
+  },
+  "audio": {
+    "sfx": []
+  },
+  "tags": [
+    "text",
+    "brand"
+  ]
+}

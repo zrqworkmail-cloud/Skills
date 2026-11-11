@@ -1,6 +1,6 @@
 ---
 name: shot-driven-video-production
-description: 以镜头为原子单位的代码化视频制作流程：剧本与帧预算 → 分镜与镜头配方 → 摄影与构图抽象 → Remotion 场景实现 → 卡点剪辑 → 逐帧质检 → 批量交付归档，含四道门禁与两个零依赖校验脚本。适用于需要可审批、可复现、可批量出片的视频项目，不用于纯实拍剪辑、纯配音或静态幻灯片。
+description: 以镜头为原子单位的代码化视频制作流程：剧本与帧预算 → 分镜与镜头配方 → 摄影与构图抽象 → Remotion 场景实现 → 卡点剪辑 → 逐帧质检 → 批量交付归档，含四道门禁与三个零依赖校验脚本。适用于需要可审批、可复现、可批量出片的视频项目，不用于纯实拍剪辑、纯配音或静态幻灯片。
 ---
 
 # 镜头驱动的视频制作
@@ -63,6 +63,7 @@ description: 以镜头为原子单位的代码化视频制作流程：剧本与�
 | 做运镜与视差 | `assets/templates/Camera.tsx` |
 | 做统一构图 | `assets/templates/Stage.tsx` |
 | 看镜头表 / 时间轴样例 | `assets/templates/shotlist.example.json`、`timeline.example.json` |
+| 选镜头卡（按信息动作检索） | `assets/cards/`（15 张，文件名即 id） |
 | 看可跑示例 / 验收场景 | `examples/minimal/src/Scene.tsx`、`PelicanBicycle.tsx` |
 | 校验时间轴 / 扫描裸色值 | `scripts/check-timeline.mjs`、`scripts/check-tokens.mjs` |
 
@@ -71,6 +72,7 @@ description: 以镜头为原子单位的代码化视频制作流程：剧本与�
 ```bash
 node scripts/check-timeline.mjs assets/templates/timeline.example.json
 node scripts/check-tokens.mjs src
+node scripts/check-recipes.mjs assets/cards
 npx remotion compositions src/index.ts
 npx remotion still src/index.ts <id> out/frame.png --frame=90
 npx remotion render src/index.ts <id> out/draft.mp4 --scale=0.5 --crf=28 --muted

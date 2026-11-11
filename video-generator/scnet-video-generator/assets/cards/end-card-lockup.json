@@ -1,0 +1,29 @@
+{
+  "id": "end-card-lockup",
+  "name": "落版定格",
+  "intent": "结论加行动号召，最后一帧定格成可截屏的完整构图",
+  "note": "末帧要能单独当封面，不能依赖前一帧的残留元素",
+  "category": "outro",
+  "shotSize": "medium",
+  "durationRange": [
+    36,
+    60
+  ],
+  "entry": {
+    "type": "spring",
+    "damping": 26
+  },
+  "exit": {
+    "type": "fade",
+    "durationInFrames": 12
+  },
+  "audio": {
+    "sfx": [
+      "logo-01"
+    ]
+  },
+  "tags": [
+    "cta",
+    "lockup"
+  ]
+}

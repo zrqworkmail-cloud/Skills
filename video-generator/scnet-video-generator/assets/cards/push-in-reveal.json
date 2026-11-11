@@ -1,0 +1,35 @@
+{
+  "id": "push-in-reveal",
+  "name": "推近揭示",
+  "intent": "缓慢推近，把注意力收束到主体",
+  "note": "推近幅度不超过 8%，否则像变焦而不像运镜",
+  "category": "camera",
+  "shotSize": "medium",
+  "durationRange": [
+    36,
+    72
+  ],
+  "entry": {
+    "type": "spring",
+    "damping": 200
+  },
+  "camera": {
+    "zoom": [
+      1,
+      1.08
+    ],
+    "easing": "outCubic"
+  },
+  "exit": {
+    "type": "cut"
+  },
+  "audio": {
+    "sfx": [
+      "whoosh-01"
+    ]
+  },
+  "tags": [
+    "reveal",
+    "calm"
+  ]
+}

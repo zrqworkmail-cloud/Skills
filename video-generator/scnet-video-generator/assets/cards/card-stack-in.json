@@ -1,0 +1,28 @@
+{
+  "id": "card-stack-in",
+  "name": "卡片堆叠",
+  "intent": "卡片依序堆叠，展示并列关系的信息",
+  "note": "错峰 4–6 帧，最多四张；再多改用列表，堆叠会糊",
+  "category": "ui-entrance",
+  "shotSize": "medium",
+  "durationRange": [
+    30,
+    54
+  ],
+  "entry": {
+    "type": "spring",
+    "damping": 22
+  },
+  "exit": {
+    "type": "cut"
+  },
+  "audio": {
+    "sfx": [
+      "pop-01"
+    ]
+  },
+  "tags": [
+    "ui",
+    "list"
+  ]
+}

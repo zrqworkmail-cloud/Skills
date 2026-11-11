@@ -16,6 +16,16 @@
       "type": "string",
       "maxLength": 40
     },
+    "intent": {
+      "type": "string",
+      "maxLength": 80,
+      "description": "这张卡完成的信息动作，选卡时先看它"
+    },
+    "note": {
+      "type": "string",
+      "maxLength": 200,
+      "description": "调参边界与常见误用"
+    },
     "category": {
       "type": "string",
       "enum": [
@@ -102,6 +112,9 @@
   "examples": [
     {
       "id": "push-in-reveal",
+      "name": "推近揭示",
+      "intent": "缓慢推近，把注意力收束到主体",
+      "note": "推近幅度不超过 8%，否则像变焦而不像运镜",
       "category": "camera",
       "shotSize": "medium",
       "durationRange": [36, 72],

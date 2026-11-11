@@ -1,0 +1,25 @@
+{
+  "id": "shape-wipe",
+  "name": "形状擦除",
+  "intent": "用一个形状擦过画面，把两个场景缝起来",
+  "note": "擦除方向承接上一镜的运动方向，反向会顶住观众",
+  "category": "transition",
+  "shotSize": "medium",
+  "durationRange": [
+    16,
+    28
+  ],
+  "exit": {
+    "type": "wipe",
+    "durationInFrames": 14
+  },
+  "audio": {
+    "sfx": [
+      "swipe-01"
+    ]
+  },
+  "tags": [
+    "wipe",
+    "brand"
+  ]
+}

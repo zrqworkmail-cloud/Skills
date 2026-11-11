@@ -49,12 +49,19 @@
   "entry": {"type": "spring", "damping": 200},
   "camera": {"zoom": [1.0, 1.08], "easing": "outCubic"},
   "exit": {"type": "cut"},
-  "audio": {"sfx": "whoosh-01"},
+  "audio": {"sfx": ["whoosh-01"]},
   "tags": ["reveal", "calm"]
 }
 ```
 
 完整约束见 `assets/templates/shot-card.schema.json`。
+
+卡库在 `assets/cards/`，一卡一文件、文件名等于 id。改完跑一次结构与引用校验：
+
+```bash
+node scripts/check-recipes.mjs assets/cards
+node scripts/check-recipes.mjs assets/cards --shotlist shotlist.json
+```
 
 ### 选卡而非造卡
 

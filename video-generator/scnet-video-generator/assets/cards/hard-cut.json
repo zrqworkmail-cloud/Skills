@@ -1,0 +1,22 @@
+{
+  "id": "hard-cut",
+  "name": "硬切",
+  "intent": "不做技巧，用节奏本身完成切换",
+  "note": "只在信息发生跳变时用；不要拿它掩盖没想清楚的转场",
+  "category": "transition",
+  "shotSize": "medium",
+  "durationRange": [
+    1,
+    2
+  ],
+  "exit": {
+    "type": "cut"
+  },
+  "audio": {
+    "sfx": []
+  },
+  "tags": [
+    "cut",
+    "rhythm"
+  ]
+}

@@ -1,6 +1,6 @@
 # scnet-video-generator · 镜头驱动的视频制作
 
-以**镜头**为原子单位的代码化视频制作流程包：四阶段、八环节、四道门禁，附设计令牌、运镜与构图抽象、两个零依赖校验脚本。
+以**镜头**为原子单位的代码化视频制作流程包：四阶段、八环节、四道门禁，附设计令牌、运镜与构图抽象、三个零依赖校验脚本。
 
 ## 安装
 
@@ -34,6 +34,7 @@ scnet-video-generator/
 │   ├── shotlist.example.json
 │   ├── timeline.example.json
 │   └── shot-card.schema.json
+├── assets/cards/            镜头卡库：15 张，覆盖 8 个类目
 ├── examples/minimal/        最小可跑工程：验证模板真的能编译、能渲染
 │   ├── src/Root.tsx         注册 Example 与 PelicanBicycle 两个 composition
 │   ├── src/Scene.tsx        四模板协同的最小镜头
@@ -42,7 +43,8 @@ scnet-video-generator/
 ├── tsconfig.json            覆盖 assets/templates 与 examples
 └── scripts/
     ├── check-timeline.mjs   G3 门禁：时间轴闭合校验
-    └── check-tokens.mjs     视觉规范门禁：裸色值/裸字号扫描
+    ├── check-tokens.mjs     视觉规范门禁：裸色值/裸字号扫描
+    └── check-recipes.mjs    配方门禁：卡片结构、语义与引用校验
 ```
 
 ## 示例与验证
@@ -90,7 +92,7 @@ npm run render      # 渲染 Example 到 out/example.mp4
 
 - **不分发任何音频**：配乐与音效需自备并确认授权，流程只定义轨道与时序。
 - **不含成片与构建产物**：仓库只存规范与参考实现。
-- **配方卡是机制，不是卡片库**：本包给出 schema 与类目，具体镜头卡需按项目积累（参考实现中有一张示例卡）。
+- **卡库是起点，不是全集**：内置 15 张卡覆盖 8 个类目，够起片不够覆盖所有题材；新卡按 `assets/cards/` 的字段补，用 `check-recipes.mjs` 校验。
 - **不绑定渲染管线**：模板假设 Remotion 的 `useCurrentFrame` 语义，换引擎需替换 `Camera`/`Stage`/`anim` 三层。
 - 门禁 G2 依赖人眼评审，不提供自动化判定。
 

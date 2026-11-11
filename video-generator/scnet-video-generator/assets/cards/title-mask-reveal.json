@@ -1,0 +1,29 @@
+{
+  "id": "title-mask-reveal",
+  "name": "遮罩揭示标题",
+  "intent": "用色块扫过，把标题从空白里推出来，开场第一秒建立语气",
+  "note": "遮罩方向要和下一镜主体的运动方向一致，否则第一口气就断",
+  "category": "opening",
+  "shotSize": "medium",
+  "durationRange": [
+    30,
+    54
+  ],
+  "entry": {
+    "type": "ease",
+    "durationInFrames": 14
+  },
+  "exit": {
+    "type": "cut"
+  },
+  "audio": {
+    "sfx": [
+      "riser-01"
+    ]
+  },
+  "tags": [
+    "hook",
+    "text",
+    "clean"
+  ]
+}

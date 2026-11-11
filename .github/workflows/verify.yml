@@ -1,0 +1,45 @@
+name: verify
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'video-generator/scnet-video-generator/**'
+      - '.github/workflows/verify.yml'
+  pull_request:
+    paths:
+      - 'video-generator/scnet-video-generator/**'
+      - '.github/workflows/verify.yml'
+
+jobs:
+  video-generator:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: video-generator/scnet-video-generator
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: 安装依赖
+        run: npm install --no-audit --no-fund
+
+      - name: 类型检查
+        run: npx tsc --noEmit
+
+      - name: 卡片结构校验
+        run: node scripts/check-recipes.mjs assets/cards
+
+      - name: 镜头表引用校验
+        run: node scripts/check-recipes.mjs assets/cards --shotlist assets/templates/shotlist.example.json
+
+      - name: 令牌扫描
+        run: |
+          node scripts/check-tokens.mjs assets/templates
+          node scripts/check-tokens.mjs examples
+
+      - name: 时间轴校验
+        run: node scripts/check-timeline.mjs assets/templates/timeline.example.json

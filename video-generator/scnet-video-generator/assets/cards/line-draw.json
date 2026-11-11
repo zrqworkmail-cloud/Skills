@@ -1,0 +1,26 @@
+{
+  "id": "line-draw",
+  "name": "折线绘制",
+  "intent": "折线沿路径绘制，强调趋势而非单点数值",
+  "note": "绘制时长与数据点数量成正比，点多用长卡，别硬压",
+  "category": "data",
+  "shotSize": "medium",
+  "durationRange": [
+    36,
+    72
+  ],
+  "entry": {
+    "type": "ease",
+    "durationInFrames": 24
+  },
+  "exit": {
+    "type": "cut"
+  },
+  "audio": {
+    "sfx": []
+  },
+  "tags": [
+    "data",
+    "trend"
+  ]
+}

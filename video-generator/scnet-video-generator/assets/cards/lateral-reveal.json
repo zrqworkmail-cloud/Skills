@@ -1,0 +1,31 @@
+{
+  "id": "lateral-reveal",
+  "name": "横移展示",
+  "intent": "横移，让第二层信息从画面外侧进入",
+  "note": "位移方向全片统一，来回换会让人失去方位感",
+  "category": "camera",
+  "shotSize": "wide",
+  "durationRange": [
+    48,
+    90
+  ],
+  "camera": {
+    "x": [
+      0,
+      -120
+    ],
+    "easing": "outCubic"
+  },
+  "exit": {
+    "type": "cut"
+  },
+  "audio": {
+    "sfx": [
+      "whoosh-02"
+    ]
+  },
+  "tags": [
+    "pan",
+    "reveal"
+  ]
+}

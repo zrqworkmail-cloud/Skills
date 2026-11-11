@@ -5,6 +5,7 @@
   "description": "镜头驱动的视频制作流程包；此 package.json 仅用于类型检查与示例渲染，不影响技能本体",
   "scripts": {
     "typecheck": "tsc --noEmit",
+    "check:cards": "node scripts/check-recipes.mjs assets/cards",
     "studio": "remotion studio examples/minimal/src/index.ts",
     "render": "remotion render examples/minimal/src/index.ts Example out/example.mp4 --codec=h264 --crf=23 --pixel-format=yuv420p --image-format=png"
   },

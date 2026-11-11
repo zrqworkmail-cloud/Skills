@@ -1,0 +1,28 @@
+{
+  "id": "panel-slide",
+  "name": "面板侧滑",
+  "intent": "面板从侧边滑入，替换当前视图",
+  "note": "滑入距离略大于面板宽度，停在边缘会露出缝",
+  "category": "ui-entrance",
+  "shotSize": "medium",
+  "durationRange": [
+    24,
+    42
+  ],
+  "entry": {
+    "type": "ease",
+    "durationInFrames": 16
+  },
+  "exit": {
+    "type": "cut"
+  },
+  "audio": {
+    "sfx": [
+      "whoosh-03"
+    ]
+  },
+  "tags": [
+    "ui",
+    "panel"
+  ]
+}
