@@ -11,7 +11,7 @@
   ],
   "exit": {
     "type": "wipe",
-    "durationInFrames": 14
+    "durationInFrames": 16
   },
   "audio": {
     "sfx": [

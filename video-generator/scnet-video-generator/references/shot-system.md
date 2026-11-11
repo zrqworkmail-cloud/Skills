@@ -56,6 +56,8 @@
 
 完整约束见 `assets/templates/shot-card.schema.json`。
 
+`exit` 不只是装饰字段：它决定这一镜怎么交给下一镜（硬切 / 叠化 / 擦除），可执行写法见 §六。
+
 卡库在 `assets/cards/`，一卡一文件、文件名等于 id。改完跑一次结构与引用校验：
 
 ```bash
@@ -146,7 +148,38 @@ node scripts/check-tokens.mjs src
 
 ---
 
-## 六、节奏参考
+## 六、跨镜转场
+
+转场不是第三镜，而是两镜之间的缝。时间轴上把它写在**出镜那一侧**：
+
+```json
+{
+  "id": "S01",
+  "frames": 90,
+  "transition": {"type": "wipe", "frames": 16, "direction": "from-left", "card": "shape-wipe"}
+}
+```
+
+| 字段 | 含义 | 约束 |
+|---|---|---|
+| `type` | `fade` 叠化 / `wipe` 擦除 | 硬切就不写 `transition` |
+| `frames` | 与下一镜重叠的帧数 | 小于相邻较短镜；超过 24 帧就不再像转场 |
+| `direction` | 擦除方向 | 承接上一镜运动方向，反向会顶住观众 |
+| `card` | 取自哪张转场卡 | `assets/cards/` 的 id，`frames` 取自该卡 `exit.durationInFrames` |
+
+渲染端用 `assets/templates/Transitions.tsx`：`sequenceFrames()` 把重叠帧补在序列尾部，`exitTransition()` 生成 `TransitionSeries.Transition`。因此成片帧数 = Σ 镜头帧，门禁 G3 的口径不变；
+`node scripts/check-timeline.mjs` 会把「序列合计 − 重叠 = 成片」打出来，便于核对。
+
+三条判断：
+
+1. 转场要有动机（换场、跳时间、换视角）；没有动机就硬切。
+2. 全片转场种类不超过两种，同一种方向保持一致。
+3. 转场期间不交付信息：观众在看缝，没在看内容。
+4. 叠化挑构图：两镜的主元素不在同一位置才能叠；两句同位置的大字叠在一起就是糊字。
+
+---
+
+## 七、节奏参考
 
 | 场景 | 平均镜头长度 |
 |---|---|
@@ -160,7 +193,7 @@ node scripts/check-tokens.mjs src
 
 ---
 
-## 七、跨镜连续性检查
+## 八、跨镜连续性检查
 
 | 检查项 | 问题表现 |
 |---|---|

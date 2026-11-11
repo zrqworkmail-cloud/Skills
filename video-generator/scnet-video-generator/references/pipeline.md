@@ -183,7 +183,8 @@ npx remotion still src/index.ts <id> out/f.png --frame=0
 
 ### C4 剪辑组装
 
-- 顺序镜头用序列容器，转场用转场容器，转场帧计入总长。
+- 顺序镜头用 `Series`；转场用 `TransitionSeries`，`transition` 写在出镜侧，两镜重叠 `frames` 帧。
+- 重叠不吃掉镜头内容：渲染端把重叠帧补在序列尾部，成片总帧仍等于 Σ 镜头帧（详见 `references/shot-system.md` §六）。
 - 三条剪辑规则：切点落在动作中段；转场要有动机；一镜一信息。
 - 钩子 ≤2s，主体 2–4s/镜（社交 1.5–3s）。
 

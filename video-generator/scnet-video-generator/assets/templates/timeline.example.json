@@ -14,6 +14,7 @@
       "move": "push",
       "frames": 60,
       "from": 0,
+      "transition": {"type": "fade", "frames": 12},
       "recipe": "push-in-reveal",
       "audio": {"vo": "VO-01"},
       "props": {"headline": "一句话钩子"}

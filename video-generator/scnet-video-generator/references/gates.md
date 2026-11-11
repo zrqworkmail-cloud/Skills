@@ -58,7 +58,8 @@ node scripts/check-timeline.mjs src/data/timeline.json
 - [ ] 镜头 id 唯一
 - [ ] 每镜 `frames` 为正整数
 - [ ] `from` 连续（若显式声明）
-- [ ] 转场帧已计入总长
+- [ ] 转场写在出镜侧的 `transition` 里，`frames` 小于相邻较短镜，末镜无转场
+- [ ] 转场重叠已补偿（成片帧 = Σ 镜头帧）
 - [ ] 平均镜头长度在片型目标区间
 - [ ] 每镜组件可独立播放
 

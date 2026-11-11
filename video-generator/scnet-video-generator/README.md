@@ -31,13 +31,16 @@ scnet-video-generator/
 │   ├── anim.ts              动画公共函数
 │   ├── Camera.tsx           运镜与视差
 │   ├── Stage.tsx            构图栅格
+│   ├── Transitions.tsx      跳镜转场（TransitionSeries 封装）
 │   ├── shotlist.example.json
 │   ├── timeline.example.json
 │   └── shot-card.schema.json
 ├── assets/cards/            镜头卡库：15 张，覆盖 8 个类目
 ├── examples/minimal/        最小可跑工程：验证模板真的能编译、能渲染
-│   ├── src/Root.tsx         注册 Example 与 PelicanBicycle 两个 composition
+│   ├── src/Root.tsx         注册 Example / PelicanBicycle / PelicanStill / Spot30
 │   ├── src/Scene.tsx        四模板协同的最小镜头
+│   ├── src/spot/Spot30.tsx  30 秒样片：六镜 + 两处转场
+│   ├── src/spot/timeline.json  样片时间轴：帧数与转场都在这里
 │   └── src/PelicanBicycle.tsx  原版提示词的验收场景
 ├── package.json             仅供示例：typecheck / studio / render
 ├── tsconfig.json            覆盖 assets/templates 与 examples
@@ -63,9 +66,9 @@ npm run render      # 渲染 Example 到 out/example.mp4
 | `Example` | 四个模板是否接得上 | 标题 / 主体 / 字幕三槽位均在安全区内 |
 | `PelicanBicycle` | `Generate an SVG of a pelican riding a bicycle.` 的动态验收场景 | 车架闭合、辐条与链条、脚随曲柄踩踏、行程顶部膝盖不反折 |
 | `PelicanStill` | 同一提示词的静态插画（白鹈鹕） | 喙尖下钩、喉囊两端闭合、两只脚均落在踏板上 |
-| `Spot30` | 30 秒样片：六张卡拼一条完整片子 | 每镜帧数落在所属卡的 `durationRange` 内 |
+| `Spot30` | 30 秒样片：六张卡拼一条完整片子 | 每镜帧数落在所属卡的 `durationRange` 内；两处转场（wipe 16 / fade 12）不改总帧 |
 
-2026-11-11 实测：`tsc --noEmit` 通过；`check-tokens.mjs` 对 `examples` 与 `assets/templates` 均 PASS；`PelicanBicycle` 90 帧渲染为 1920×1080 / 30fps / 3.00s / h264 `yuv420p`。
+2026-11-11 实测：`tsc --noEmit` 通过；`check-tokens.mjs` 对 `examples` 与 `assets/templates` 均 PASS；`PelicanBicycle` 90 帧渲染为 1920×1080 / 30fps / 3.00s / h264 `yuv420p`；`Spot30` 900 帧（内有两处转场重叠 28 帧）渲染为 1920×1080 / 30fps / 30.00s / h264 `yuv420p`。
 
 渲染有两个坑，示例脚本已规避：
 
@@ -87,6 +90,7 @@ npm run render      # 渲染 Example 到 out/example.mp4
 
 - Node.js ≥ 18（两个脚本只用内置模块，无第三方依赖）
 - Remotion 4.x 与 React 19（仅示例需要；`npm i` 装在包根）
+- 转场需要 `@remotion/transitions`（已列入依赖；不用转场可不装）
 - FFmpeg / ffprobe（G4 校验；也可用 `npx remotion ffprobe`）
 
 ## 已知边界

@@ -2,7 +2,7 @@
   "project": "示例：30 秒流程说明",
   "fps": 30,
   "durationInFrames": 900,
-  "notes": "六个镜头，帧数落在各自配方卡的 durationRange 内；配方卡取自 assets/cards/",
+  "notes": "六个镜头，帧数落在各自配方卡的 durationRange 内；出镜转场写在 transition 里（硬切不写），配方卡取自 assets/cards/",
   "shots": [
     {
       "id": "S01",
@@ -10,6 +10,7 @@
       "angle": "eye",
       "move": "wipe-out",
       "frames": 90,
+      "transition": {"type": "wipe", "frames": 16, "direction": "from-left", "card": "shape-wipe"},
       "composition": "中心构图，标题占画面 1/2，副标题紧随其下",
       "lighting": "纯色底 + 强调色擦除揭示",
       "audio": {"vo": "VO-01", "sfx": []},
@@ -49,6 +50,7 @@
       "angle": "eye",
       "move": "static",
       "frames": 180,
+      "transition": {"type": "fade", "frames": 12},
       "composition": "左侧标题，右侧条形图，基线与标签对齐",
       "lighting": "平光，强调色只用在数值",
       "audio": {"vo": "VO-04", "sfx": []},

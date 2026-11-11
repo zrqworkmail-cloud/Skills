@@ -47,7 +47,7 @@ description: 以镜头为原子单位的代码化视频制作流程：剧本与�
 
 **G2 分镜审批**：每镜有静帧；六要素齐全；每镜至少一个新信息；文字在安全区内；缩到 320px 宽标题仍可读。
 
-**G3 时间轴闭合**：`node scripts/check-timeline.mjs <timeline.json>` 退出码为 0；无空洞、无重叠；转场帧计入总长。
+**G3 时间轴闭合**：`node scripts/check-timeline.mjs <timeline.json>` 退出码为 0；无空洞；转场以重叠接入（`transition` 写在出镜侧），成片总帧 = Σ 镜头帧。
 
 **G4 交付验收**：`ffprobe` 规格一致且为 `yuv420p`；同帧两次渲染哈希一致；响度 −14 LUFS（网络）或 −23 LUFS（广播）；逐镜检查首帧、中帧、末帧。
 
@@ -62,6 +62,7 @@ description: 以镜头为原子单位的代码化视频制作流程：剧本与�
 | 取动画函数 | `assets/templates/anim.ts` |
 | 做运镜与视差 | `assets/templates/Camera.tsx` |
 | 做统一构图 | `assets/templates/Stage.tsx` |
+| 做跨镜转场 | `assets/templates/Transitions.tsx` |
 | 看镜头表 / 时间轴样例 | `assets/templates/shotlist.example.json`、`timeline.example.json` |
 | 选镜头卡（按信息动作检索） | `assets/cards/`（15 张，文件名即 id） |
 | 看可跑示例 / 验收场景 | `examples/minimal/src/Scene.tsx`、`PelicanBicycle.tsx` |

@@ -1,6 +1,8 @@
 import React from 'react';
-import {AbsoluteFill, Series, interpolate, useCurrentFrame, useVideoConfig} from 'remotion';
+import {AbsoluteFill, interpolate, useCurrentFrame, useVideoConfig} from 'remotion';
+import {TransitionSeries} from '@remotion/transitions';
 import {theme} from '../../../../assets/templates/theme';
+import {exitTransition, sequenceFrames, type TransitionSpec} from '../../../../assets/templates/Transitions';
 import {Camera, moves} from '../../../../assets/templates/Camera';
 import {CLAMP, easeOut, rise, springIn, stagger} from '../../../../assets/templates/anim';
 import timeline from './timeline.json';
@@ -9,11 +11,13 @@ import timeline from './timeline.json';
  * 30 秒样片：用 assets/cards/ 里的六张卡拼一条完整片子。
  *
  * 帧数不写死，全部取自 timeline.json —— 门禁校验的与实际渲染的是同一份数据。
+ * 改法：改 props 里的字，不碰动画代码；改帧数，去 timeline.json。
  */
 
 type SpotShot = {
   id: string;
   frames: number;
+  transition?: TransitionSpec;
   props: {headline: string; sub?: string};
 };
 
@@ -337,17 +341,33 @@ const SCENES: Record<string, React.FC<{headline: string; sub?: string}>> = {
   S06: S06End,
 };
 
+/**
+ * 把镜头表铺成一条 TransitionSeries 轨道。
+ * 有 transition 的两镜之间插一条转场；硬切什么都不插，两镜直接相贴。
+ */
+const buildTrack = (list: SpotShot[]): React.ReactNode[] => {
+  const children: React.ReactNode[] = [];
+
+  list.forEach((shot, index) => {
+    const Scene = SCENES[shot.id];
+    const isLast = index === list.length - 1;
+
+    children.push(
+      <TransitionSeries.Sequence key={shot.id} durationInFrames={sequenceFrames(shot, isLast)}>
+        <Scene {...shot.props} />
+      </TransitionSeries.Sequence>,
+    );
+
+    if (!isLast && shot.transition) {
+      children.push(exitTransition(shot.transition, `${shot.id}-out`));
+    }
+  });
+
+  return children;
+};
+
 export const Spot30: React.FC = () => (
   <AbsoluteFill style={{backgroundColor: theme.color.bg}}>
-    <Series>
-      {shots.map((shot) => {
-        const Scene = SCENES[shot.id];
-        return (
-          <Series.Sequence key={shot.id} durationInFrames={shot.frames}>
-            <Scene {...shot.props} />
-          </Series.Sequence>
-        );
-      })}
-    </Series>
+    <TransitionSeries>{buildTrack(shots)}</TransitionSeries>
   </AbsoluteFill>
 );

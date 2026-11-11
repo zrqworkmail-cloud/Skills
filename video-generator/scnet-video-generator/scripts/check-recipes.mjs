@@ -155,8 +155,26 @@ for (const name of files.sort()) {
     if (card.entry?.durationInFrames && card.entry.durationInFrames >= min) {
       fail(name, 'entry.durationInFrames', `入场 ${card.entry.durationInFrames} 帧吃掉整镜（最短 ${min}）`);
     }
-    if (card.exit?.durationInFrames && card.exit.durationInFrames >= min) {
+    if (card.exit?.durationInFrames && card.category !== 'transition' && card.exit.durationInFrames >= min) {
       fail(name, 'exit.durationInFrames', `出场 ${card.exit.durationInFrames} 帧吃掉整镜（最短 ${min}）`);
+    }
+  }
+
+  if (card.category === 'transition') {
+    // 转场卡的 durationRange 指“重叠多长”，不是“这一镜多长”
+    const exit = card.exit;
+    if (!exit) {
+      fail(name, 'exit', '类目为 transition 的卡必须给 exit');
+    } else if (exit.type === 'cut') {
+      if (exit.durationInFrames !== undefined) {
+        fail(name, 'exit.durationInFrames', '硬切没有重叠帧，不应给 durationInFrames');
+      }
+    } else if (!Number.isInteger(exit.durationInFrames)) {
+      fail(name, 'exit.durationInFrames', '软转场必须给时长，否则渲染端不知道叠几帧');
+    } else if (typeof min === 'number' && typeof max === 'number') {
+      if (exit.durationInFrames < min || exit.durationInFrames > max) {
+        fail(name, 'exit.durationInFrames', `出场 ${exit.durationInFrames} 帧应落在 durationRange [${min}, ${max}] 内`);
+      }
     }
   }
 
