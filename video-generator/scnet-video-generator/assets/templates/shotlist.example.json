@@ -1,0 +1,47 @@
+{
+  "project": "示例：30 秒产品解说",
+  "fps": 30,
+  "durationInFrames": 180,
+  "notes": "六要素齐全才可进入 G2；description 写给评审看，props 写给代码看",
+  "shots": [
+    {
+      "id": "S01",
+      "size": "wide",
+      "angle": "eye",
+      "move": "push 1.00 → 1.06",
+      "frames": 60,
+      "composition": "中心构图，主体占画面 1/3，右侧留负空间放标题",
+      "lighting": "逆光剪影 + 边缘轮廓光",
+      "audio": {"vo": "VO-01", "sfx": []},
+      "recipe": "push-in-reveal",
+      "description": "海面与远山，一个问题被抛出，观众还没看到主体",
+      "props": {"headline": "一句话钩子"}
+    },
+    {
+      "id": "S02",
+      "size": "medium",
+      "angle": "eye",
+      "move": "pan 0 → -80",
+      "frames": 72,
+      "composition": "三分构图，主体贴左三分线，右侧文字区",
+      "lighting": "侧逆光，暖色主光",
+      "audio": {"vo": "VO-02", "sfx": ["whoosh-01"]},
+      "recipe": "lateral-reveal",
+      "description": "镜头横移，产品界面从右侧滑入，展示第一个核心能力",
+      "props": {"headline": "三个要点之一"}
+    },
+    {
+      "id": "S03",
+      "size": "close",
+      "angle": "low",
+      "move": "static",
+      "frames": 48,
+      "composition": "中心构图，主体占 1/2，底部留字幕区",
+      "lighting": "顶光收束 + 暗角",
+      "audio": {"vo": "VO-03", "sfx": ["click-01"]},
+      "recipe": "settle-close",
+      "description": "特写落版，结论与行动号召，最后一帧可作封面",
+      "props": {"headline": "结论与行动"}
+    }
+  ]
+}

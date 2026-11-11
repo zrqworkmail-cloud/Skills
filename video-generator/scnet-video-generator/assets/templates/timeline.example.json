@@ -1,0 +1,44 @@
+{
+  "fps": 30,
+  "durationInFrames": 180,
+  "colorScript": [
+    {"at": 0, "palette": ["#0E1626", "#1B2A4A"], "mood": "冷静铺垫"},
+    {"at": 60, "palette": ["#1B2A4A", "#F0A03C"], "mood": "情绪抬升"},
+    {"at": 132, "palette": ["#0E1626", "#3ECF8E"], "mood": "收束落点"}
+  ],
+  "shots": [
+    {
+      "id": "S01",
+      "size": "wide",
+      "angle": "eye",
+      "move": "push",
+      "frames": 60,
+      "from": 0,
+      "recipe": "push-in-reveal",
+      "audio": {"vo": "VO-01"},
+      "props": {"headline": "一句话钩子"}
+    },
+    {
+      "id": "S02",
+      "size": "medium",
+      "angle": "eye",
+      "move": "pan",
+      "frames": 72,
+      "from": 60,
+      "recipe": "lateral-reveal",
+      "audio": {"vo": "VO-02", "sfx": ["whoosh-01"]},
+      "props": {"headline": "三个要点之一"}
+    },
+    {
+      "id": "S03",
+      "size": "close",
+      "angle": "low",
+      "move": "static",
+      "frames": 48,
+      "from": 132,
+      "recipe": "settle-close",
+      "audio": {"vo": "VO-03"},
+      "props": {"headline": "结论与行动"}
+    }
+  ]
+}

@@ -11,7 +11,8 @@
 | [slide-generator/workbuddy-slide-generator/](./slide-generator/workbuddy-slide-generator/) | 科研演示 | WorkBuddy | 模板继承、样页审核、可编辑 PPTX 与图片式演示 |
 | [video-generator/workbuddy-video-generator/](./video-generator/workbuddy-video-generator/) | 视频制作 | WorkBuddy | 从选题到成片提交的八阶段流程：选题 → 脚本 → 分镜 → 素材 → 剪辑合成 → 质检 → 交付 → 发布复盘。含技能本体、方法论、参考实现代码、各支片复盘 |
 | [video-generator/qoder-video-generator/](./video-generator/qoder-video-generator/) | 视频制作 | Qoder / Codex | 本地知识短片产线 v9.2：S0–S11、视觉实验／连续演示、brief/frame/shotlist 输入契约、样片闸门与交付 MP4 逐项复验。含流程手册、模板与工具脚本 |
-| [video-generator/codex-video-generator/](./video-generator/codex-video-generator/) | 学术动态视频与视频 PPT | Codex | Remotion 参考动效复用、KaTeX、完整分镜、无配音技术叙事及逐页可控视频 PPT |
+| [video-generator/codex-video-generator/](./video-generator/codex-video-generator/) | 学术动态视频与视频 PPT | Codex | Remotion 参考动效复用、KaTeX、完整分镜、无配音技术叙事及逐页可控视频 PPT |
+| [video-generator/scnet-video-generator/](./video-generator/scnet-video-generator/) | 视频制作 | SCNet | 镜头驱动的通用流程：分镜审批、时间轴校验、镜头配方卡与可复用模板 |
 
 各功能目录下的 `README.md` 是该领域的入口索引。
 
