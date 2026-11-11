@@ -34,10 +34,39 @@ scnet-video-generator/
 │   ├── shotlist.example.json
 │   ├── timeline.example.json
 │   └── shot-card.schema.json
+├── examples/minimal/        最小可跑工程：验证模板真的能编译、能渲染
+│   ├── src/Root.tsx         注册 Example 与 PelicanBicycle 两个 composition
+│   ├── src/Scene.tsx        四模板协同的最小镜头
+│   └── src/PelicanBicycle.tsx  原版提示词的验收场景
+├── package.json             仅供示例：typecheck / studio / render
+├── tsconfig.json            覆盖 assets/templates 与 examples
 └── scripts/
     ├── check-timeline.mjs   G3 门禁：时间轴闭合校验
     └── check-tokens.mjs     视觉规范门禁：裸色值/裸字号扫描
 ```
+
+## 示例与验证
+
+`package.json` 与 `tsconfig.json` 位于包根，只服务于示例，不影响技能本体。装好依赖后可逐层验证：
+
+```bash
+npm i
+npm run typecheck   # tsc --noEmit，同时覆盖 assets/templates 与 examples
+npm run studio      # 打开 Remotion Studio
+npm run render      # 渲染 Example 到 out/example.mp4
+```
+
+| composition | 用途 | 判分点 |
+|---|---|---|
+| `Example` | 四个模板是否接得上 | 标题 / 主体 / 字幕三槽位均在安全区内 |
+| `PelicanBicycle` | `Generate an SVG of a pelican riding a bicycle.` 的验收场景 | 车架闭合、辐条与链条、脚随曲柄踩踏、行程顶部膝盖不反折 |
+
+2026-11-11 实测：`tsc --noEmit` 通过；`check-tokens.mjs` 对 `examples` 与 `assets/templates` 均 PASS；`PelicanBicycle` 90 帧渲染为 1920×1080 / 30fps / 3.00s / h264 `yuv420p`。
+
+渲染有两个坑，示例脚本已规避：
+
+- 无外网时 Remotion 下不到 Chrome，需 `--browser-executable="<本机 Chrome 路径>"`；
+- `--pixel-format=yuv420p` 必须同时给 `--image-format=png`，否则中间帧走 JPEG，成片是 `yuvj420p`。
 
 ## 与既有三套的差异
 
@@ -53,7 +82,7 @@ scnet-video-generator/
 ## 前置条件
 
 - Node.js ≥ 18（两个脚本只用内置模块，无第三方依赖）
-- Remotion 4.x（仅当使用 `assets/templates/` 下的组件时）
+- Remotion 4.x 与 React 19（仅示例需要；`npm i` 装在包根）
 - FFmpeg / ffprobe（G4 校验；也可用 `npx remotion ffprobe`）
 
 ## 已知边界

@@ -1,0 +1,22 @@
+{
+  "name": "scnet-video-generator",
+  "version": "1.0.0",
+  "private": true,
+  "description": "镜头驱动的视频制作流程包；此 package.json 仅用于类型检查与示例渲染，不影响技能本体",
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "studio": "remotion studio examples/minimal/src/index.ts",
+    "render": "remotion render examples/minimal/src/index.ts Example out/example.mp4 --codec=h264 --crf=23 --pixel-format=yuv420p --image-format=png"
+  },
+  "dependencies": {
+    "@remotion/cli": "^4.0.542",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "remotion": "^4.0.542"
+  },
+  "devDependencies": {
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "typescript": "^7.0.2"
+  }
+}

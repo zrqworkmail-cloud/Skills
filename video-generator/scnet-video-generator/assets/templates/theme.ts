@@ -18,6 +18,29 @@ export const theme = {
     negative: '#F2545B',
   },
 
+  /** 插画用色：矢量插画仍走令牌，避免场景里出现裸色值 */
+  illo: {
+    skyTop: '#0F1829',
+    skyBottom: '#1F2D47',
+    sun: '#F0A03C',
+    hillFar: '#17243C',
+    hillNear: '#1E2C45',
+    ground: '#0B1220',
+    road: '#2A3A56',
+    bikeFrame: '#E6EEF9',
+    bikeShade: '#9FB2CA',
+    tire: '#D7E2F0',
+    birdBody: '#6E4B33',
+    birdBodyDark: '#563926',
+    birdNeck: '#8B5A34',
+    birdCrest: '#B87A3F',
+    birdHead: '#E9CB96',
+    beak: '#F2A03C',
+    pouch: '#D3894B',
+    leg: '#C98A3E',
+    eye: '#151019',
+  },
+
   /** 字阶：只取这几档，不要临时插值 */
   type: {
     display: 96,

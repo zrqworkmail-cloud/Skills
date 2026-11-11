@@ -63,6 +63,7 @@ description: 以镜头为原子单位的代码化视频制作流程：剧本与�
 | 做运镜与视差 | `assets/templates/Camera.tsx` |
 | 做统一构图 | `assets/templates/Stage.tsx` |
 | 看镜头表 / 时间轴样例 | `assets/templates/shotlist.example.json`、`timeline.example.json` |
+| 看可跑示例 / 验收场景 | `examples/minimal/src/Scene.tsx`、`PelicanBicycle.tsx` |
 | 校验时间轴 / 扫描裸色值 | `scripts/check-timeline.mjs`、`scripts/check-tokens.mjs` |
 
 ## 常用命令
@@ -77,6 +78,8 @@ npx remotion render src/index.ts <id> out/main.mp4 --codec=h264 --crf=18 --pixel
 ```
 
 > 若要 `yuv420p`，中间帧必须用 png；`--image-format=jpeg` 会产出全范围的 `yuvj420p`，部分播放器偏色。
+
+> 包根另带最小示例：`npm i && npm run typecheck` 可验证 `assets/templates/` 真能编译，`npm run render` 渲染 `Example`。冠名机无外网时，Remotion 下不到 Chrome，需追加 `--browser-executable="<本机 Chrome 路径>"`。
 
 ## 交付前最后三问
 
