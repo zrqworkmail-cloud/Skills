@@ -6,8 +6,8 @@
   "category": "opening",
   "shotSize": "close",
   "durationRange": [
-    24,
-    42
+    45,
+    90
   ],
   "entry": {
     "type": "spring",

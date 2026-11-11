@@ -6,8 +6,8 @@
   "category": "interaction",
   "shotSize": "close",
   "durationRange": [
-    18,
-    30
+    30,
+    90
   ],
   "exit": {
     "type": "cut"

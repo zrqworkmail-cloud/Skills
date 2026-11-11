@@ -7,7 +7,8 @@
     "typecheck": "tsc --noEmit",
     "check:cards": "node scripts/check-recipes.mjs assets/cards",
     "studio": "remotion studio examples/minimal/src/index.ts",
-    "render": "remotion render examples/minimal/src/index.ts Example out/example.mp4 --codec=h264 --crf=23 --pixel-format=yuv420p --image-format=png"
+    "render": "remotion render examples/minimal/src/index.ts Example out/example.mp4 --codec=h264 --crf=23 --pixel-format=yuv420p --image-format=png",
+    "render:spot": "remotion render examples/minimal/src/index.ts Spot30 out/spot30.mp4 --codec=h264 --crf=20 --pixel-format=yuv420p --image-format=png"
   },
   "dependencies": {
     "@remotion/cli": "^4.0.542",

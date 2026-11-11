@@ -6,8 +6,8 @@
   "category": "ui-entrance",
   "shotSize": "medium",
   "durationRange": [
-    24,
-    42
+    75,
+    150
   ],
   "entry": {
     "type": "ease",

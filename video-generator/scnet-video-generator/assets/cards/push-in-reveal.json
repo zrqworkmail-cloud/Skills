@@ -6,8 +6,8 @@
   "category": "camera",
   "shotSize": "medium",
   "durationRange": [
-    36,
-    72
+    90,
+    180
   ],
   "entry": {
     "type": "spring",

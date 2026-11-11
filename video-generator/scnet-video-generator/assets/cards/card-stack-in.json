@@ -6,8 +6,8 @@
   "category": "ui-entrance",
   "shotSize": "medium",
   "durationRange": [
-    30,
-    54
+    90,
+    150
   ],
   "entry": {
     "type": "spring",

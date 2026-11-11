@@ -6,8 +6,8 @@
   "category": "data",
   "shotSize": "medium",
   "durationRange": [
-    30,
-    60
+    120,
+    210
   ],
   "entry": {
     "type": "ease",

@@ -6,8 +6,8 @@
   "category": "typography",
   "shotSize": "close",
   "durationRange": [
-    20,
-    36
+    60,
+    120
   ],
   "entry": {
     "type": "ease",

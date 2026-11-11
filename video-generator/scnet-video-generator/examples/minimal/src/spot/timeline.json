@@ -1,0 +1,86 @@
+{
+  "project": "示例：30 秒流程说明",
+  "fps": 30,
+  "durationInFrames": 900,
+  "notes": "六个镜头，帧数落在各自配方卡的 durationRange 内；配方卡取自 assets/cards/",
+  "shots": [
+    {
+      "id": "S01",
+      "size": "medium",
+      "angle": "eye",
+      "move": "wipe-out",
+      "frames": 90,
+      "composition": "中心构图，标题占画面 1/2，副标题紧随其下",
+      "lighting": "纯色底 + 强调色擦除揭示",
+      "audio": {"vo": "VO-01", "sfx": []},
+      "recipe": "title-mask-reveal",
+      "description": "色块擦开，抛出主张：先分镜，再写代码",
+      "props": {"headline": "先分镜，再写代码", "sub": "30 秒看懂镜头驱动的视频流程"}
+    },
+    {
+      "id": "S02",
+      "size": "wide",
+      "angle": "eye",
+      "move": "push 1.00 → 1.08",
+      "frames": 180,
+      "composition": "三分构图，镜头表贴左三分线，右侧留负空间",
+      "lighting": "侧逆光感，表格行高亮",
+      "audio": {"vo": "VO-02", "sfx": ["whoosh-01"]},
+      "recipe": "push-in-reveal",
+      "description": "推近一张镜头表，说明每镜都有 id、帧数与配方卡",
+      "props": {"headline": "每一镜都能被核对"}
+    },
+    {
+      "id": "S03",
+      "size": "medium",
+      "angle": "eye",
+      "move": "static",
+      "frames": 150,
+      "composition": "三张卡片错峰堆叠，中心偏右",
+      "lighting": "顶光收束，卡片投影",
+      "audio": {"vo": "VO-03", "sfx": ["pop-01"]},
+      "recipe": "card-stack-in",
+      "description": "三道门禁依次落下，说明卡点在流程里而非事后",
+      "props": {"headline": "门禁在流程里，不在事后"}
+    },
+    {
+      "id": "S04",
+      "size": "medium",
+      "angle": "eye",
+      "move": "static",
+      "frames": 180,
+      "composition": "左侧标题，右侧条形图，基线与标签对齐",
+      "lighting": "平光，强调色只用在数值",
+      "audio": {"vo": "VO-04", "sfx": []},
+      "recipe": "bar-grow",
+      "description": "条形增长展示返工分布，指向「问题前移」",
+      "props": {"headline": "返工集中在分镜阶段"}
+    },
+    {
+      "id": "S05",
+      "size": "close",
+      "angle": "eye",
+      "move": "static",
+      "frames": 120,
+      "composition": "中心构图，单行大字，字距略展开",
+      "lighting": "纯底，无装饰",
+      "audio": {"vo": "VO-05", "sfx": []},
+      "recipe": "word-rise",
+      "description": "逐字上浮，落一句可复述的结论",
+      "props": {"headline": "改一个字，只改 props"}
+    },
+    {
+      "id": "S06",
+      "size": "medium",
+      "angle": "eye",
+      "move": "settle",
+      "frames": 180,
+      "composition": "中心落版，标题 + 分隔线 + 副标题",
+      "lighting": "暗底，强调色分隔线",
+      "audio": {"vo": "VO-06", "sfx": ["logo-01"]},
+      "recipe": "end-card-lockup",
+      "description": "落版定格，给出下一步动作",
+      "props": {"headline": "从一张镜头卡开始", "sub": "四阶段 · 八环节 · 四道门禁"}
+    }
+  ]
+}

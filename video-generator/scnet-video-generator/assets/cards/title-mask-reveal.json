@@ -6,8 +6,8 @@
   "category": "opening",
   "shotSize": "medium",
   "durationRange": [
-    30,
-    54
+    45,
+    90
   ],
   "entry": {
     "type": "ease",

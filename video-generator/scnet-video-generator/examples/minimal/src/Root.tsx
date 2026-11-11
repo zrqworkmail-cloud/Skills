@@ -3,6 +3,7 @@ import {Composition} from 'remotion';
 import {Scene} from './Scene';
 import {PelicanBicycle} from './PelicanBicycle';
 import {PelicanStill} from './PelicanStill';
+import {Spot30} from './spot/Spot30';
 
 export const RemotionRoot: React.FC = () => (
   <>
@@ -29,6 +30,14 @@ export const RemotionRoot: React.FC = () => (
       height={1080}
       fps={30}
       durationInFrames={1}
+    />
+    <Composition
+      id="Spot30"
+      component={Spot30}
+      width={1920}
+      height={1080}
+      fps={30}
+      durationInFrames={900}
     />
   </>
 );

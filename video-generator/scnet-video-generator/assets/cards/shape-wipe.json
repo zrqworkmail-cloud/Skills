@@ -7,7 +7,7 @@
   "shotSize": "medium",
   "durationRange": [
     16,
-    28
+    36
   ],
   "exit": {
     "type": "wipe",

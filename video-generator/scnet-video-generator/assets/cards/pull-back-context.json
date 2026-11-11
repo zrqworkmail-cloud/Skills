@@ -6,8 +6,8 @@
   "category": "camera",
   "shotSize": "wide",
   "durationRange": [
-    42,
-    78
+    60,
+    180
   ],
   "camera": {
     "zoom": [
