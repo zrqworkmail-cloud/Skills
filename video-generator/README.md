@@ -8,13 +8,15 @@
 |---|---|---|
 | [workbuddy-video-generator/](./workbuddy-video-generator/) | WorkBuddy | 与项目、工具、素材来源无关的八阶段主干：选题 → 脚本 → 分镜 → 素材 → 剪辑合成 → 质检 → 交付 → 发布复盘。含技能本体、方法论、Remotion 参考实现与各支片复盘 |
 | [qoder-video-generator/](./qoder-video-generator/) | Qoder / Codex | 本地知识短片产线 v9.2：S0–S11、视觉实验／连续演示、brief/frame/shotlist 输入契约、关键机制样片确认、交付 MP4 逐项复验。含流程手册、模板与 35 个工具脚本 |
-| [codex-video-generator/](./codex-video-generator/) | Codex | 学术动态技术视频与逐页可控视频 PPT；参考动效复用、数学排版、完整分镜与归档校验 |
+| [codex-video-generator/](./codex-video-generator/) | Codex | 学术动态技术视频与逐页可控视频 PPT；参考动效复用、数学排版、完整分镜与归档校验 |
+| [scnet-video-generator/](./scnet-video-generator/) | SCNet | 镜头驱动的通用流程：四阶段八环节、四道门禁、镜头配方卡与两个零依赖校验脚本；含设计令牌、运镜与构图模板 |
 
 ## 选哪一套
 
 - 需要一个**与工具链无关的通用流程**（换题材、换引擎都能套）→ `workbuddy-video-generator`。
 - 需要一套**绑定本地 Remotion / ComfyUI 产线**的可执行流程，且接受其输入契约与闸门 → `qoder-video-generator`。
 - 需要**学术计算机制动画与按完整分镜控制的 PowerPoint** → `codex-video-generator`，运行时技能名为 `academic-motion-video-ppt`。
+- 需要**通用、可审批、可复现**的镜头级流程，且能套到任意引擎 → `scnet-video-generator`。
 - **同一任务只选一套，不叠加多套门禁。** 各套流程的阶段划分、样稿定义与验收口径不同，混用会产生互相矛盾的判据。
 
 ## 子目录结构约定

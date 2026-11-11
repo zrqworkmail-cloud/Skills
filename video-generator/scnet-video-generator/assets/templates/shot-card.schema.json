@@ -1,0 +1,115 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://example.org/shot-card.schema.json",
+  "title": "Shot Card",
+  "description": "镜头配方卡：从库中选卡填参，保证画质下限与可复现性",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "category", "shotSize", "durationRange"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+      "description": "小写短横线，全库唯一"
+    },
+    "name": {
+      "type": "string",
+      "maxLength": 40
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "opening",
+        "camera",
+        "transition",
+        "typography",
+        "ui-entrance",
+        "interaction",
+        "data",
+        "outro"
+      ]
+    },
+    "shotSize": {
+      "type": "string",
+      "enum": ["wide", "medium", "close", "detail"]
+    },
+    "durationRange": {
+      "type": "array",
+      "description": "[最短帧, 最长帧]",
+      "items": {"type": "integer", "minimum": 1},
+      "minItems": 2,
+      "maxItems": 2
+    },
+    "entry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type"],
+      "properties": {
+        "type": {"type": "string", "enum": ["none", "spring", "ease"]},
+        "damping": {"type": "number", "minimum": 1},
+        "durationInFrames": {"type": "integer", "minimum": 1}
+      }
+    },
+    "camera": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "zoom": {
+          "type": "array",
+          "items": {"type": "number", "minimum": 0.1},
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "x": {"type": "array", "items": {"type": "number"}, "minItems": 2, "maxItems": 2},
+        "y": {"type": "array", "items": {"type": "number"}, "minItems": 2, "maxItems": 2},
+        "easing": {
+          "type": "string",
+          "enum": ["linear", "outCubic", "inOutCubic", "outQuint"]
+        }
+      }
+    },
+    "exit": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type"],
+      "properties": {
+        "type": {"type": "string", "enum": ["cut", "fade", "wipe"]},
+        "durationInFrames": {"type": "integer", "minimum": 1}
+      }
+    },
+    "audio": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "sfx": {"type": "array", "items": {"type": "string"}, "maxItems": 4}
+      }
+    },
+    "tags": {
+      "type": "array",
+      "items": {"type": "string", "maxLength": 20},
+      "maxItems": 8
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {"category": {"const": "camera"}},
+        "required": ["category"]
+      },
+      "then": {"required": ["camera"]}
+    }
+  ],
+  "examples": [
+    {
+      "id": "push-in-reveal",
+      "category": "camera",
+      "shotSize": "medium",
+      "durationRange": [36, 72],
+      "entry": {"type": "spring", "damping": 200},
+      "camera": {"zoom": [1.0, 1.08], "easing": "outCubic"},
+      "exit": {"type": "cut"},
+      "audio": {"sfx": ["whoosh-01"]},
+      "tags": ["reveal", "calm"]
+    }
+  ]
+}
