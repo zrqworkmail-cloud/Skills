@@ -59,7 +59,8 @@ npm run render      # 渲染 Example 到 out/example.mp4
 | composition | 用途 | 判分点 |
 |---|---|---|
 | `Example` | 四个模板是否接得上 | 标题 / 主体 / 字幕三槽位均在安全区内 |
-| `PelicanBicycle` | `Generate an SVG of a pelican riding a bicycle.` 的验收场景 | 车架闭合、辐条与链条、脚随曲柄踩踏、行程顶部膝盖不反折 |
+| `PelicanBicycle` | `Generate an SVG of a pelican riding a bicycle.` 的动态验收场景 | 车架闭合、辐条与链条、脚随曲柄踩踏、行程顶部膝盖不反折 |
+| `PelicanStill` | 同一提示词的静态插画（白鹈鹕） | 喙尖下钩、喉囊两端闭合、两只脚均落在踏板上 |
 
 2026-11-11 实测：`tsc --noEmit` 通过；`check-tokens.mjs` 对 `examples` 与 `assets/templates` 均 PASS；`PelicanBicycle` 90 帧渲染为 1920×1080 / 30fps / 3.00s / h264 `yuv420p`。
 
