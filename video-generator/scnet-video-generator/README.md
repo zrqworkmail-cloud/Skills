@@ -31,7 +31,7 @@ scnet-video-generator/
 │   ├── anim.ts              动画公共函数
 │   ├── Camera.tsx           运镜与视差
 │   ├── Stage.tsx            构图栅格
-│   ├── Transitions.tsx      跳镜转场（TransitionSeries 封装）
+│   ├── Transitions.tsx      跨镜转场（TransitionSeries 封装）
 │   ├── shotlist.example.json
 │   ├── timeline.example.json
 │   └── shot-card.schema.json
@@ -41,6 +41,7 @@ scnet-video-generator/
 │   ├── src/Scene.tsx        四模板协同的最小镜头
 │   ├── src/spot/Spot30.tsx  30 秒样片：六镜 + 两处转场
 │   ├── src/spot/timeline.json  样片时间轴：帧数与转场都在这里
+│   ├── src/PelicanStill.tsx    同一提示词的静态插画（白鹈鹕）
 │   └── src/PelicanBicycle.tsx  原版提示词的验收场景
 ├── package.json             仅供示例：typecheck / studio / render
 ├── tsconfig.json            覆盖 assets/templates 与 examples
