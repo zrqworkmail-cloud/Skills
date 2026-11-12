@@ -63,6 +63,7 @@ description: 以镜头为原子单位的代码化视频制作流程：剧本与�
 | 做运镜与视差 | `assets/templates/Camera.tsx` |
 | 做统一构图 | `assets/templates/Stage.tsx` |
 | 做跨镜转场 | `assets/templates/Transitions.tsx` |
+| 查 Remotion 命令、参数与规格 | `docs/remotion-workflow.md`（制作流程表 v2.1） |
 | 看镜头表 / 时间轴样例 | `assets/templates/shotlist.example.json`、`timeline.example.json` |
 | 选镜头卡（按信息动作检索） | `assets/cards/`（15 张，文件名即 id） |
 | 看可跑示例 / 验收场景 | `examples/minimal/src/Scene.tsx`、`PelicanBicycle.tsx` |
