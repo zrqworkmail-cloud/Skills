@@ -26,6 +26,8 @@ scnet-video-generator/
 │   ├── pipeline.md          四阶段八环节详解
 │   ├── shot-system.md       镜头表、配方卡、视觉规范
 │   └── gates.md             四道门禁 + 签署模板 + 失败模式库
+├── docs/                    单册操作手册
+│   └── remotion-workflow.md Remotion 制作流程表 v2.1（跨镜转场字段与重叠核算）
 ├── assets/templates/        可直接拷进 Remotion 工程的参考实现
 │   ├── theme.ts             设计令牌
 │   ├── anim.ts              动画公共函数
