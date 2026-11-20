@@ -50,7 +50,8 @@ scnet-video-generator/
 └── scripts/
     ├── check-timeline.mjs   G3 门禁：时间轴闭合校验
     ├── check-tokens.mjs     视觉规范门禁：裸色值/裸字号扫描
-    └── check-recipes.mjs    配方门禁：卡片结构、语义与引用校验
+    ├── check-recipes.mjs    配方门禁：卡片结构、语义与引用校验
+    └── test-timeline.mjs    check-timeline 回归用例（含转场负例）
 ```
 
 ## 示例与验证

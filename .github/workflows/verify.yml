@@ -45,3 +45,6 @@ jobs:
         run: |
           node scripts/check-timeline.mjs assets/templates/timeline.example.json
           node scripts/check-timeline.mjs examples/minimal/src/spot/timeline.json
+
+      - name: 时间轴校验回归
+        run: node scripts/test-timeline.mjs
