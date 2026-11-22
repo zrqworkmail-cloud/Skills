@@ -1,0 +1,89 @@
+{
+  "shot_id": "mine-handoff",
+  "duration_seconds": 8,
+  "goal": "看清谁递出毯子、谁接稳、谁先松手。",
+  "layers": {
+    "background": [
+      "远山",
+      "矿区"
+    ],
+    "characters": [
+      "格瓦拉",
+      "矿工"
+    ],
+    "foreground": [
+      "近处岩石",
+      "火星"
+    ]
+  },
+  "layer_stack": {
+    "view": "格瓦拉面向画面右，左臂为远侧，右臂为近侧。矿工面向画面左，反向排布。",
+    "back_to_front": [
+      "远山与矿区",
+      "两人的远侧臂与手",
+      "裤腿与裤腰",
+      "头颈",
+      "盖住裤腰和颈根的上衣",
+      "近侧袖子",
+      "毯子",
+      "压住毯子下缘的近侧手",
+      "近处岩石、火光与火星"
+    ],
+    "occlusion_checks": [
+      "伸手时远侧臂绕到躯干轮廓外，远侧掌心进入毯子背面。",
+      "双手交接时毯子压住远侧手，近侧手托住毯子下缘。",
+      "松手时格瓦拉的远侧手回到身体后面，衣摆始终覆盖裤腰。"
+    ]
+  },
+  "expression_beats": [
+    {
+      "character": "矿工",
+      "trigger": "准备接住毯子",
+      "from": 2.1,
+      "to": 2.65,
+      "change": "视线移到毯子，微低头"
+    },
+    {
+      "character": "矿工",
+      "trigger": "确认接稳",
+      "from": 6.15,
+      "to": 6.65,
+      "change": "抬眼回看格瓦拉"
+    }
+  ],
+  "beats": [
+    {
+      "at": 0,
+      "action": "格瓦拉抱着毯子，矿工看见后抬手。",
+      "holder": "格瓦拉"
+    },
+    {
+      "at": 2.1,
+      "action": "格瓦拉向前伸手，矿工准备托住毯子。",
+      "holder": "格瓦拉"
+    },
+    {
+      "at": 3.8,
+      "action": "双方同时托住，短暂停留。",
+      "holder": "共同托住"
+    },
+    {
+      "at": 4.7,
+      "action": "矿工接稳，格瓦拉松手，毯子连续过渡到接收者。",
+      "holder": "矿工"
+    },
+    {
+      "at": 6.2,
+      "action": "矿工收回手，余下时间留给反应。",
+      "holder": "矿工"
+    }
+  ],
+  "inputs": [
+    "media/mine/background.png",
+    "media/mine/foreground.png",
+    "media/mine/ernesto-rig.json",
+    "media/mine/miner-rig.json",
+    "media/mine/blanket.png",
+    "src/MineHandoff.tsx"
+  ]
+}

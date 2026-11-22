@@ -1,0 +1,4 @@
+interface:
+  display_name: "数字剪纸动画"
+  short_description: "用 AI 生图、纸偶关节与 Remotion 制作可编辑的二维分层角色动画"
+  default_prompt: "用 $layered-cutout-animation 做一段横屏数字剪纸样片，让纸偶完成一个有明确起止和接触点的动作。"

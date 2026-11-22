@@ -1,0 +1,10 @@
+__pycache__/
+node_modules/
+.env
+.env.local
+*.mp4
+*.mov
+*.mp3
+*.m4a
+*.wav
+*.zip
